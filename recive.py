@@ -39,7 +39,7 @@ def monitor_callback(pkt):
 		# abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[8:]
-		print >>name,': ',f, data,
+		print >>'[',name,']: ',f, data,
 		f.close()
 #		print '			<< '+data
 

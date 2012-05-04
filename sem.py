@@ -18,10 +18,13 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 # Levanto los parametros necesarios para la comunicacion
-target = raw_input('Enter the target device [192.168.1.71]: ')
-passwd = raw_input('Enter the password key for the communication [20121357]: ')
-interface = raw_input('Enter the interface used for the communication (listening) [eth0]: ')
+name = raw_input('Name [test]: ')
+target = raw_input('Target device [192.168.1.71]: ')
+passwd = raw_input('Key for the communication [20121357]: ')
+interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
+if name == '':
+	name = 'test'
 if target == '':
 	target = '192.168.1.71'
 if passwd == '':
@@ -30,7 +33,7 @@ if interface == '':
 	interface = 'eth0'
 	
 # Dejo monitoreando en background para la recepcion de mensajes
-rec_p = subprocess.Popen(['python', 'recive.py','--interface='+interface,'--password='+passwd,'&'])
+rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'&'])
 rec_pid = rec_p.pid
 
 # Loop para chatear
