@@ -12,15 +12,18 @@ from scapy.all import *
 
 
 
-opts, extra = getopt.getopt(sys.argv[1:], 'i:f:p:', ['interface=', 'file=', 'password=' ])
+opts, extra = getopt.getopt(sys.argv[1:], 'n:i:f:p:', ['name=', 'interface=', 'file=', 'password=' ])
 
 # Seteo los valores por defecto en caso de que no los setee el usuario en los parametros
 interface='eth0'
 archivo='message.txt'
 passwd='20121357'
+name ='test'
 
 # Levanta los valores de los parametros
 for code,param in opts:
+  if code in ['-n','--name']:
+     name = param	
   if code in ['-i','--interface']:
      interface = param
   elif code in ['-f','--file']:
@@ -36,9 +39,9 @@ def monitor_callback(pkt):
 		# abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[8:]
-		print >>f, data,
+		print >>name,': ',f, data,
 		f.close()
-#		print '			< '+data
+#		print '			<< '+data
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
