@@ -60,7 +60,7 @@ while txt.strip()!=':q!':
 	print "							[ %s : " %(count),
 	for a in range(0, count):
 		print "%s " %(a + 1),
-		payload = passwd + txt[first:last]
+		payload = passwd + name + txt[first:last]
 		# ensamblamos el paquete
 		# las capas que no definimos son definidas automaticamente por scapy
 		pkt = l3/l4/payload

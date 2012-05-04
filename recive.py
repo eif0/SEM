@@ -37,9 +37,10 @@ def monitor_callback(pkt):
 	# filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la clave que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
 		# abrimos el archivo de destino y escribimos los datos recibidos
+		print 'viene en el paquete el nombre: ',pkt[ICMP].load[8:12]
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[8:]
-		print >>'[',name,']: ',f, data,
+		print >>f,'[',name,']: '+data,
 		f.close()
 #		print '			<< '+data
 
