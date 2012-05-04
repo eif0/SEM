@@ -38,9 +38,10 @@ def monitor_callback(pkt):
 	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
 		# abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
-		data = pkt[ICMP].load[12:]
-		if data[-2:] == '\n':
-			print >>f,'[',pkt[ICMP].load[8:12],']: '+data,
+		data = pkt[ICMP].load[13:]
+		if pkt[ICMP].load[12:13] == '0':
+			print >>f,'[',pkt[ICMP].load[8:12],']: ',
+			print >>f, data,
 		else:
 			print >>f,data,
 		f.close()
