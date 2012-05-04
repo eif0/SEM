@@ -1,12 +1,16 @@
 #!/usr/bin/python
 
+#importamos librerias
 import sys
 import getopt
 import logging
-from scapy.all import *
 
 # definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+
+from scapy.all import *
+
+
 
 opts, extra = getopt.getopt(sys.argv[1:], 'i:f:p:', ['interface=', 'file=', 'password=' ])
 
@@ -33,7 +37,7 @@ def monitor_callback(pkt):
 		data = pkt[ICMP].load[8:]
 		print >>f, data,
 		f.close()
-		print data
+#		print '			< '+data
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
