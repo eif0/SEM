@@ -33,6 +33,7 @@ def monitor_callback(pkt):
 		data = pkt[ICMP].load[8:]
 		print >>f, data,
 		f.close()
+		print data
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
