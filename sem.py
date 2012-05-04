@@ -33,7 +33,7 @@ if passwd == '':
 if interface == '':
 	interface = 'eth0'
 
-# Trunco las variables en caso de que excedan el tamaño max
+# Trunco las variables en caso de que excedan el tamanio max
 name = name[0:4]
 passwd = passwd[0:8]
 
