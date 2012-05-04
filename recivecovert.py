@@ -28,6 +28,7 @@ for code,param in opts:
   elif code in ['-p','--password']:
      passwd = param     
      
+     
 # definimos la funcion que se va a llamar en la llegada de cada paquete
 def monitor_callback(pkt):
 	# filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la clave que definimos
