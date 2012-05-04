@@ -1,12 +1,16 @@
 #!/usr/bin/python
 
-# by renateitor 
-#SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol
+#  
+# SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol
+# by renateitor
+#
+# Last release available in:
+# https://github.com/renateitor/SEM
 #
 # Dependencias: tcpdump, python-scapy
 #
 
-# importamos librerias
+# Importamos librerias
 import os
 import subprocess
 import time
@@ -14,7 +18,7 @@ import sys
 import getopt
 import logging
 
-# definimos que solamente se debe alertar ante un error
+# Definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
@@ -24,6 +28,7 @@ target = raw_input('Target device [192.168.1.71]: ')
 passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
+# Seteo los defaults en caso de que el usuario no complete algun parametro
 if name == '':
 	name = 'test'
 if target == '':
@@ -37,12 +42,11 @@ if interface == '':
 name = name[0:4]
 passwd = passwd[0:8]
 
-# Completo las variables en caso de que sean mas cortas de lo solicitado
+# Completo las variables en caso de que sean mas cortas que el min
 while name.__len__() < 4:
 	name = name+'_'
 while passwd.__len__() < 8:
 	passwd = passwd+'_'
-
 	
 # Dejo monitoreando en background para la recepcion de mensajes
 rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'&'])
@@ -72,12 +76,11 @@ while txt.strip()!=':q!':
 	print "							[ %s : " %(count),
 	for a in range(0, count):
 		print "%s " %(a + 1),
-		if a == 0: #es la primer parte
+		if a == 0: # si es la primer parte del envio escribo el prompt con el nombre del usuario
 			payload = passwd + name +'0'+ txt[first:last]
-		else:
+		else: # si no es la primer parte simplemente escribo la parte del mensaje
 			payload = passwd + name +'1'+ txt[first:last]
-		# ensamblamos el paquete
-		# las capas que no definimos son definidas automaticamente por scapy
+		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
 		# enviamos el paquete
 		a = sr(pkt, verbose = 0, retry = 0, timeout = 1)
@@ -86,7 +89,7 @@ while txt.strip()!=':q!':
 	print ']'
 	
 	
-	txt=raw_input('>> ')
+	txt=raw_input('>> ') # mostramos el prompt al usuario indicando que puede mandar un mensaje
 
 # Mato el proceso que escucha
 os.system('kill -9 '+str(rec_pid))
