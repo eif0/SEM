@@ -36,7 +36,7 @@ if interface == '':
 
 
 # Dejo monitoreando en background
-rec_p = subprocess.Popen(['python', 'recivecovert.py',' -i '+interface+' -p '+passwd+' &'])
+rec_p = subprocess.Popen(['python', 'recivecovert.py','--interface='+interface,'--password='+passwd,'&'])
 rec_pid = rec_p.pid
 
 
