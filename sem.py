@@ -19,9 +19,9 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 # Levanto los parametros necesarios para la comunicacion
-name = raw_input('Name [test]: ')
+name = raw_input('Name(4-char) [test]: ')
 target = raw_input('Target device [192.168.1.71]: ')
-passwd = raw_input('Key for the communication [20121357]: ')
+passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
 if name == '':
@@ -32,6 +32,17 @@ if passwd == '':
 	passwd = '20121357'
 if interface == '':
 	interface = 'eth0'
+
+# Trunco las variables en caso de que excedan el tamaño max
+name = name[0:4]
+passwd = passwd[0:8]
+
+# Completo las variables en caso de que sean mas cortas de lo solicitado
+while name.__len__() < 4:
+	name = name+'_'
+while passwd.__len__() < 8:
+	passwd = passwd+'_'
+
 	
 # Dejo monitoreando en background para la recepcion de mensajes
 rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'&'])
