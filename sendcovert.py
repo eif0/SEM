@@ -6,6 +6,11 @@ import getopt
 import logging
 from scapy.all import *
 
+# definimos que solamente se debe alertar ante un error
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+
+
+
 # levantamos los parametros que se le pasan al paquete
 opts, extra = getopt.getopt(sys.argv[1:], 't:d:p:', ['target=', 'data=', 'password=' ])
 
@@ -28,9 +33,6 @@ data = data+'\n'
 
 
 
-# definimos que solamente se debe alertar ante un error
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-
 # construimos la capa 3 del paquete (IP)
 l3 = IP()
 l3.dst = target
@@ -47,7 +49,7 @@ last = (msgsize)
 count = (len(data)/msgsize)+1
 # entramos en un bucle en el cual vamos a enviar un paquete para cada trozo de datos
 for a in range(0, count):
-	print "Enviando parte %s de %s" %(a + 1, count)
+	print "							[%s/%s]" %(a + 1, count)
 	payload = passwd + data[first:last]
 	# ensamblamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 	pkt = l3/l4/payload
@@ -55,4 +57,4 @@ for a in range(0, count):
 	a = sr(pkt, verbose = 0, retry = 0, timeout = 1)
 	first += msgsize
 	last += msgsize
-print "Mensaje Enviado!"
+print "							[ok]"

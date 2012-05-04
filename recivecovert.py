@@ -5,6 +5,9 @@ import getopt
 import logging
 from scapy.all import *
 
+# definimos que solamente se debe alertar ante un error
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+
 opts, extra = getopt.getopt(sys.argv[1:], 'i:f:p:', ['interface=', 'file=', 'password=' ])
 
 # Seteo los valores por defecto en caso de que no los setee el usuario en los parametros
@@ -21,9 +24,6 @@ for code,param in opts:
   elif code in ['-p','--password']:
      passwd = param     
      
-# solamente debe alertar ante un error
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-
 # definimos la funcion que se va a llamar en la llegada de cada paquete
 def monitor_callback(pkt):
 	# filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la clave que definimos
