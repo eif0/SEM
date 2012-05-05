@@ -62,7 +62,6 @@ def monitor_callback(pkt):
 			print >>f,data,
 		f.close()
 		# Mostramos los datos por pantalla (deprecated)
-#		print '			<< '+data
 		f = open(archivo, 'r')
 		lastline = f.readlines()[-1]
 		if ('\n' in lastline) and (lastline[0:11] != '[ '+name+' ]:  '):

@@ -7,6 +7,7 @@
 # Last release available in:
 # https://github.com/renateitor/SEM
 #
+# Debe ejecutarse como root ya que es la unica forma de crear paquete de red a medida
 # Dependencias: tcpdump, python-scapy
 #
 
