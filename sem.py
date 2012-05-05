@@ -77,7 +77,7 @@ rec_pid = rec_p.pid
 # Loop para chatear
 print 'To exit write: \':q!\''
 txt='void'
-while txt.strip()!=':q!':
+while True:
 	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
 	
 	# Parametros internos (menos el de quit que esta en el while)
@@ -93,6 +93,9 @@ while txt.strip()!=':q!':
 		
 		'''
 		continue
+	if txt.strip()!=':q!':
+		break
+		
 	
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
