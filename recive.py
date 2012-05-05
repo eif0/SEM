@@ -65,7 +65,7 @@ def monitor_callback(pkt):
 #		print '			<< '+data
 		f = open(archivo, 'r')
 		lastline = f.readline()
-		if lastline[-1:] == '\n':
+		if '\n' in lastline:
 			print lastline
 		f.close()
 
