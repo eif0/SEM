@@ -66,6 +66,8 @@ def monitor_callback(pkt):
 		if pkt[ICMP].load[12:13] == '9':
 			f = open(archivo, 'r')
 			lastline = f.readlines()[-1] # Leo la ultima linea del log
+			# Me fijo si la ultima linea del log no se corresponde a un chat enviado por mi
+			# (esto lo hago ya que cuando vuelve el ping me llega lo que yo mandé tambien)
 			if lastline[0:11] != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
 			f.close()	
