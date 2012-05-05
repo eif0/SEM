@@ -55,7 +55,7 @@ rec_pid = rec_p.pid
 
 # Loop para chatear
 print 'To exit write: \':q!\''
-txt=raw_input(' ')
+txt=raw_input('')
 while txt.strip()!=':q!':
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
