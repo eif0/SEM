@@ -118,12 +118,14 @@ while txt.strip()!=':q!':
 		if a == 0:
 			payload = passwd + name +'0'+ txt[first:last]
 		# si es la ultima parte del envio pongo el bit 13 en '9'
-		elif a-1 == count:
-			print 'ENTRA!!!!!!!!!!!!!!!!!!!!'
+		elif a == count:
 			payload = passwd + name +'9'+ txt[first:last]
 		# si no es la primer parte ni la ultima pongo el bit 13 en '1'
 		else:
 			payload = passwd + name +'1'+ txt[first:last]
+
+		print 'a:',a
+
 		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
 		# enviamos el paquete
