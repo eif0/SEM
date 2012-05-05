@@ -23,9 +23,11 @@ import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
+# Por defecto se ejecuta en modo simple
+verbose = False
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 'h', ['help'])
+opts, extra = getopt.getopt(sys.argv[1:], 'hv', ['help','verbose'])
 
 for code,param in opts:
 	if code in ['-h','--help']:
@@ -38,11 +40,39 @@ Last release available in: https://github.com/renateitor/SEM
 Deps: tcpdump, python-scapy
 
 
+EXTERNAL PARAMS:
+      
  -h  --help 
       Show this message
+      
+ -v  --verbose
+      Show inside app information about the number of ICMP packages sent     
+      
+      
+      
+INSIDE APP PARAMS:
+
+ :q!
+      Exit Program
+
+ :c!
+      Clear Screen
+      
+ :h!
+      Show Help
+      
+ :v!
+      Start Verbose Mode 
+      
+ :s!
+      Start Simple Mode (Stop Verbose)
+             
 			
 '''
 		exit()
+
+	if code in ['-v','--verbose']:
+		verbose = True
 
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
@@ -86,18 +116,29 @@ while True:
 	if txt.strip() ==':c!':		# Clear Screen
 		os.system('clear')
 		continue
+		
 	if txt.strip() ==':h!':		# Show Help
 		print '''
 		
  :h!   Show this help
  :q!   Exit Program
- :c!   Clear screen
+ :c!   Clear Screen
+ :v!   Start Verbose Mode
+ :s!   Start Simple Mode (Stop Verbose)
 		
 		'''
 		continue
+		
 	if txt.strip()==':q!':		# Exit
 		break
+	
+	if txt.strip() ==':v!':		# Verbose Mode
+		verbose = True
+		continue
 		
+	if txt.strip() ==':s!':		# Simple Mode
+		verbose = False
+		continue
 	
 	txt=txt+'\n'
 	
@@ -117,9 +158,14 @@ while True:
 	last = (msgsize)
 	count = (len(txt)/msgsize)+1
 	# entramos en un bucle en el cual vamos a enviar un paquete para cada parte de los datos
-	print "							[ %s : " %(count),
+	
+	if verbose:
+		print "							[ %s : " %(count),
+	
 	for a in range(0, count):
-		print "%s " %(a + 1),
+		
+		if verbose:
+			print "%s " %(a + 1),
 
 		# si es la primer parte del envio, y NO es la unica pongo el bit 13 en '0'
 		if (a == 0) and (a+1 != count):
@@ -143,7 +189,9 @@ while True:
 		a = sr(pkt, verbose = 0, retry = 0, timeout = 1)
 		first += msgsize
 		last += msgsize
-	print ']'
+	
+	if verbose:
+		print ']'
 	
 	
 	
