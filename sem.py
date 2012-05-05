@@ -98,9 +98,14 @@ while txt.strip()!=':q!':
 	print "							[ %s : " %(count),
 	for a in range(0, count):
 		print "%s " %(a + 1),
-		if a == 0: # si es la primer parte del envio escribo el prompt con el nombre del usuario
+		# si es la primer parte del envio pongo el bit en 0
+		if a == 0:
 			payload = passwd + name +'0'+ txt[first:last]
-		else: # si no es la primer parte simplemente escribo la parte del mensaje
+		# si es la ultima parte del envio pongo el bit en 9
+		elif a == count:
+			payload = passwd + name +'9'+ txt[first:last]
+		# si no es la primer parte ni la ultima pongo el bit en 1
+		else:
 			payload = passwd + name +'1'+ txt[first:last]
 		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
