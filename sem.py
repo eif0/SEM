@@ -27,10 +27,10 @@ from scapy.all import *
 
 # Levantamos lo que se pasa por parametro
 opts = getopt.getopt(sys.argv[1:], 'h', ['help'])
-
-if code in ['-h','--help']:
-	print 'Esta es la ayuda'
-	break
+for code in opts:
+	if code in ['-h','--help']:
+		print 'Esta es la ayuda'
+		break
 
 
 # Levanto los parametros necesarios para la comunicacion
