@@ -105,7 +105,8 @@ rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+in
 rec_pid = rec_p.pid
 
 # Loop para chatear
-print 'To exit write: \':q!\''
+print '\nTo exit write: \':q!\''
+print 'To have help write: \':h!\'\n\n'
 txt='void'
 while True:
 
