@@ -58,14 +58,14 @@ for code,param in opts:
      
 # Definimos la funcion que se va a llamar en la llegada de cada paquete
 def monitor_callback(pkt):
-	# Diltramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
+	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[13:]
-		# Verifico si es la primer parte
+		# Verifico si es la primer parte de una serie o un paquete unico
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
-			print >>f,'[',pkt[ICMP].load[8:12],']: ',
+			print >>f,'[',pkt[ICMP].load[8:12],']: ', # Imprimo en el log el nombre del usuario
 			print >>f, data,
 		else:
 			print >>f,data,
