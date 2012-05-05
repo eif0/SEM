@@ -31,8 +31,8 @@ for code,param in opts:
 	if code in ['-h','--help']:
 		print 'Esta es la ayuda'
 		exit()
-		raise SystemExit
-		sys.exit()
+		#raise SystemExit
+		#sys.exit()
 
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
