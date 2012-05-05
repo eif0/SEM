@@ -81,7 +81,7 @@ while txt.strip()!=':q!':
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
 
-	# construimos la capa 3 del paquete (IP)
+	# construimos la capa 3 del paquete (IP) 
 	l3 = IP()
 	l3.dst = target
 
