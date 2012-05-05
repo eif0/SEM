@@ -61,9 +61,10 @@ def monitor_callback(pkt):
 		else:
 			print >>f,data,
 		f.close()
-		# Mostramos los datos por pantalla (deprecated)
+		# Mostramos los datos por pantalla
 		f = open(archivo, 'r')
-		lastline = f.readlines()[-1]
+		lastline = f.readlines()[-1] # Leo la ultima linea del log
+		# Si la ultima linea esta completa y no faltan llegar partes lo imprime
 		if ('\n' in lastline) and (lastline[0:11] != '[ '+name+' ]:  '):
 			print '					<< '+lastline[11:]
 		f.close()
