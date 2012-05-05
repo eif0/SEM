@@ -30,7 +30,7 @@ opts = getopt.getopt(sys.argv[1:], 'h', ['help'])
 for code in opts:
 	if code in ['-h','--help']:
 		print 'Esta es la ayuda'
-		break
+		sys.exit(0)
 
 
 # Levanto los parametros necesarios para la comunicacion
