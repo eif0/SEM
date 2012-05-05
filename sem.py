@@ -118,7 +118,7 @@ while txt.strip()!=':q!':
 		if a == 0:
 			payload = passwd + name +'0'+ txt[first:last]
 		# si es la ultima parte del envio pongo el bit 13 en '9'
-		elif a == count:
+		elif a-1 == count:
 			print 'ENTRA!!!!!!!!!!!!!!!!!!!!'
 			payload = passwd + name +'9'+ txt[first:last]
 		# si no es la primer parte ni la ultima pongo el bit 13 en '1'
