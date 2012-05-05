@@ -93,7 +93,7 @@ while True:
 		
 		'''
 		continue
-	if txt.strip()!=':q!':
+	if txt.strip()==':q!':
 		break
 		
 	
