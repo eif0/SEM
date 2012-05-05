@@ -30,18 +30,18 @@ opts, extra = getopt.getopt(sys.argv[1:], 'h', ['help='])
 for code,param in opts:
 	if code in ['-h','--help']:
 		print '''
-			SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol.
-			Last release available in: https://github.com/renateitor/SEM
+SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol.
+Last release available in: https://github.com/renateitor/SEM
+
+*** Must run as root ***
+
+Deps: tcpdump, python-scapy
+
+
+	-h	--help 
+				Show this message
 			
-			*** Must run as root ***
-			
-			Deps: tcpdump, python-scapy
-			
-				
-				-h	--help 
-					Show this message
-			
-		'''
+'''
 		exit()
 
 # Levanto los parametros necesarios para la comunicacion
