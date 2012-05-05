@@ -23,6 +23,16 @@ import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
+
+
+# Levantamos lo que se pasa por parametro
+opts = getopt.getopt(sys.argv[1:], 'h', ['help'])
+
+if code in ['-h','--help']:
+	print 'Esta es la ayuda'
+	break
+
+
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
 target = raw_input('Target device [192.168.1.71]: ')
