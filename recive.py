@@ -63,6 +63,8 @@ def monitor_callback(pkt):
 		f.close()
 
 		# Si es el ultimo paquete mostramos los datos por pantalla
+		print pkt[ICMP].load[12:13]
+		
 		if pkt[ICMP].load[12:13] == '9':
 			f = open(archivo, 'r')
 			lastline = f.readlines()[-1] # Leo la ultima linea del log
