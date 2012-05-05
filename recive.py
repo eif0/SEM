@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# recive.py es parte de SEM (Security Enhanced Messaging)
+# recive.py es parte de SEM (Security Enhanced Messaging).
 # 
 # Last release available in:
 # https://github.com/renateitor/SEM

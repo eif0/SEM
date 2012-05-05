@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #  
-# SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol
+# SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol.
 # by renateitor
 #
 # Last release available in:
