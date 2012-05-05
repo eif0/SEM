@@ -90,7 +90,7 @@ while txt.strip()!=':q!':
 	print ']'
 	
 	
-	txt=raw_input('>> ') # mostramos el prompt al usuario indicando que puede mandar un mensaje
+	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
 
 # Mato el proceso que escucha
 os.system('kill -9 '+str(rec_pid))
