@@ -76,9 +76,9 @@ rec_pid = rec_p.pid
 
 # Loop para chatear
 print 'To exit write: \':q!\''
-txt=raw_input('')
+txt='void'
 while txt.strip()!=':q!':
-	
+	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
 	if txt.strip()!=':c!':
 		os.system('clear')
 		continue
@@ -121,7 +121,7 @@ while txt.strip()!=':q!':
 	print ']'
 	
 	
-	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
+	
 
 # Mato el proceso que escucha
 os.system('kill -9 '+str(rec_pid))
