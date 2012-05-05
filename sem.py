@@ -24,15 +24,13 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 
-
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 'h:', ['help='])
-for code,param in opts:
+opts, extra = getopt.getopt(sys.argv[1:], 'h', ['help'])
+
+for code in opts:
 	if code in ['-h','--help']:
 		print 'Esta es la ayuda'
 		exit()
-		#raise SystemExit
-		#sys.exit()
 
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
