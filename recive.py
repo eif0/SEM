@@ -16,7 +16,7 @@
 #
 # bits 9-12 > nombre del usr
 #
-# bit 13 >  es '0' si es la primer parte de una serie
+# bit 13 >	es '0' si es la primer parte de una serie
 #			es '1' si es una parte intermedia en un envio de una serie
 #			es '5' si es un envio de una sola parte
 #			es '9' si es la ultima parte de un enio de una serie 
