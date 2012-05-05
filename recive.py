@@ -63,6 +63,11 @@ def monitor_callback(pkt):
 		f.close()
 		# Mostramos los datos por pantalla (deprecated)
 #		print '			<< '+data
+		f = open(archivo, 'r')
+		lastline = f.readline()
+		print lastline
+		f.close()
+
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
