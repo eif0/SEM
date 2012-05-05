@@ -68,24 +68,16 @@ def monitor_callback(pkt):
 			print >>f,'[',pkt[ICMP].load[8:12],']: ',
 			print >>f, data,
 		else:
-			print pkt[ICMP].load[12:13]
 			print >>f,data,
 		f.close()
 
-		# Si es el ultimo paquete mostramos los datos por pantalla
-		
-		#print pkt[ICMP].load[12:13]
-		
+		# Si es el ultimo paquete de una serie, o el unico mostramos los datos por pantalla
+		if (pkt[ICMP].load[12:13] == '9') or (pkt[ICMP].load[12:13] == '5'):
+			f = open(archivo, 'r')
+			lastline = f.readlines()[-1] # Leo la ultima linea del log
+			print '					<< '+lastline[11:]
+			f.close()
 
-				
-####################  DEPRECATED
-#		f = open(archivo, 'r')
-#		lastline = f.readlines()[-1] # Leo la ultima linea del log
-#		# Si la ultima linea esta completa y no faltan llegar partes lo imprime
-#		if ('\n' in lastline) and (lastline[0:11] != '[ '+name+' ]:  '):
-#			print '					<< '+lastline[11:]
-#		f.close()
-####################
 
 
 # empezamos a escuchar en la interface definida por parametro
