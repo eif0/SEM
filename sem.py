@@ -79,9 +79,19 @@ print 'To exit write: \':q!\''
 txt='void'
 while txt.strip()!=':q!':
 	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
+	
+	# Parametros internos (menos el de quit que esta en el while)
 	if txt.strip() ==':c!':
 		os.system('clear')
 		continue
+	if txt.strip() ==':h!':
+		print '''
+		
+ :h!   Show this help
+ :q!   Exit Program
+ :c!   Clear screen
+		
+		'''
 	
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
