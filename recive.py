@@ -8,12 +8,21 @@
 #
 
 # ------------------------------------------------------
+#
 # Los paquetes estan compuestos de la siguiente manera:
 # (los datos se pasan en el campo load)
+#
 # bits 1-8 > key
+#
 # bits 9-12 > nombre del usr
-# bit 13 > indicamos si el paquete es el primero de la serie (0) o no lo es (1)
+#
+# bit 13 >  es '0' si es la primer parte de una serie
+#			es '1' si es una parte intermedia en un envio de una serie
+#			es '5' si es un envio de una sola parte
+#			es '9' si es la ultima parte de un enio de una serie 
+#
 # bit 14-.. > texto a mandar
+#
 # ------------------------------------------------------
 
 
@@ -55,7 +64,7 @@ def monitor_callback(pkt):
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[13:]
 		# Verifico si es la primer parte
-		if pkt[ICMP].load[12:13] == '0':
+		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
 			print >>f,'[',pkt[ICMP].load[8:12],']: ',
 			print >>f, data,
 		else:
