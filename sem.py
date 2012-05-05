@@ -79,8 +79,8 @@ print 'To exit write: \':q!\''
 txt='void'
 while txt.strip()!=':q!':
 	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
-	if txt.strip()!=':c!':
-		print 'entra'
+	if txt.strip() ==':c!':
+		os.system('clear')
 		continue
 	
 	txt=txt+'\n'
