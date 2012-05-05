@@ -58,7 +58,8 @@ def monitor_callback(pkt):
 		if pkt[ICMP].load[12:13] == '0':
 			print >>f,'[',pkt[ICMP].load[8:12],']: ',
 			print >>f, data,
-		else:
+		else
+			print pkt[ICMP].load[12:13]
 			print >>f,data,
 		f.close()
 

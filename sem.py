@@ -78,13 +78,15 @@ rec_pid = rec_p.pid
 print 'To exit write: \':q!\''
 txt='void'
 while True:
-	txt=raw_input('') # mostramos el prompt al usuario indicando que puede mandar un mensaje
+
+	# Leemos el texto del usuario
+	txt=raw_input('')
 	
-	# Parametros internos (menos el de quit que esta en el while)
-	if txt.strip() ==':c!':
+	# Parametros internos
+	if txt.strip() ==':c!':		# Clear Screen
 		os.system('clear')
 		continue
-	if txt.strip() ==':h!':
+	if txt.strip() ==':h!':		# Show Help
 		print '''
 		
  :h!   Show this help
@@ -93,11 +95,12 @@ while True:
 		
 		'''
 		continue
-	if txt.strip()==':q!':
+	if txt.strip()==':q!':		# Exit
 		break
 		
 	
 	txt=txt+'\n'
+	
 	# a partir de aca empieza el armado del paquete y el envio
 
 	# construimos la capa 3 del paquete (IP) 
