@@ -38,8 +38,8 @@ Last release available in: https://github.com/renateitor/SEM
 Deps: tcpdump, python-scapy
 
 
-	-h	--help 
-				Show this message
+ -h  --help 
+      Show this message
 			
 '''
 		exit()
