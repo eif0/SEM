@@ -26,8 +26,8 @@ from scapy.all import *
 
 
 # Levantamos lo que se pasa por parametro
-opts = getopt.getopt(sys.argv[1:], 'h', ['help'])
-for code in opts:
+opts, extra = getopt.getopt(sys.argv[1:], 'h:', ['help='])
+for code,param in opts:
 	if code in ['-h','--help']:
 		print 'Esta es la ayuda'
 		exit()
