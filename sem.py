@@ -92,6 +92,7 @@ while txt.strip()!=':q!':
  :c!   Clear screen
 		
 		'''
+		continue
 	
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
@@ -118,6 +119,7 @@ while txt.strip()!=':q!':
 			payload = passwd + name +'0'+ txt[first:last]
 		# si es la ultima parte del envio pongo el bit 13 en '9'
 		elif a == count:
+			print 'ENTRA!!!!!!!!!!!!!!!!!!!!'
 			payload = passwd + name +'9'+ txt[first:last]
 		# si no es la primer parte ni la ultima pongo el bit 13 en '1'
 		else:
