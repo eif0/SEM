@@ -124,7 +124,7 @@ while txt.strip()!=':q!':
 		else:
 			payload = passwd + name +'1'+ txt[first:last]
 
-		print 'a:',a
+		print 'a:'+a+'|count:'+count
 
 		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
