@@ -78,6 +78,11 @@ rec_pid = rec_p.pid
 print 'To exit write: \':q!\''
 txt=raw_input('')
 while txt.strip()!=':q!':
+	
+	if txt.strip()!=':c!':
+		os.system('clear')
+		continue
+	
 	txt=txt+'\n'
 	# a partir de aca empieza el armado del paquete y el envio
 
