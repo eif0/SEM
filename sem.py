@@ -174,7 +174,7 @@ def showhelp():
  :v!       Start Verbose Mode
  :s!       Start Simple Mode (Stop Verbose)
  :send!    Send a File
- :save!    save a recived File
+ :save!    Save a Recived File
 		
 		'''
 
