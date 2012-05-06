@@ -190,6 +190,9 @@ def getmd5(file_sum):
 
 # Comienza la interfaz del usr
 
+# Blanqueamos el archivo donde se van a almacenar los logs de esta sesion
+os.system('echo \'\' > message.txt')
+
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
 target = raw_input('Target device [192.168.1.71]: ')
