@@ -51,7 +51,7 @@ interface='eth0'
 archivo='message.txt'
 passwd='20121357'
 name ='test'
-recibido = '/tmp/test'
+recibido = './recibido.txt'
 
 # Levanta los valores de los parametros
 for code,param in opts:
@@ -99,7 +99,7 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '4':
 			data = pkt[ICMP].load[13:]
 			tempfile = str(int(time.time()))
-			recibido = '/tmp/'+tempfile
+#			recibido = '/tmp/'+tempfile
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
