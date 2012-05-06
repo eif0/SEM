@@ -18,6 +18,7 @@ import time
 import sys
 import getopt
 import logging
+import random
 
 # Definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
@@ -195,14 +196,15 @@ def getmd5(file_sum):
 os.system('echo \'\' > message.txt')
 
 # Levanto los parametros necesarios para la comunicacion
-name = raw_input('Name(4-char) [test]: ')
+name = raw_input('Name(4-char) [random]: ')
 target = raw_input('Target device [192.168.1.71]: ')
 passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
 # Seteo los defaults en caso de que el usuario no complete algun parametro
 if name == '':
-	name = 'test'
+	# Creo un nombre random si no hay uno definido
+	name = ''.join([random.choice('abcdefghijklmnopqrstuvwxyz0123456789') for x in xrange(4)])
 if target == '':
 	target = '192.168.1.71'
 if passwd == '':
