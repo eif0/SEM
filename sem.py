@@ -288,6 +288,6 @@ while True:
 os.system('kill -9 '+str(rec_pid))
 logfilename = str(int(time.time()))
 os.system('mv message.txt chatlog_'+logfilename[-6:-1]+'.txt')
-print '\n\nSession Log File: '+logfilename[-6:-1]+'.txt\n\n'
+print '\n\n\n*** [ Session Log File: chatlog_'+logfilename[-6:-1]+'.txt ] ***'
 print '\n\nGood Bye!\n\n'
 
