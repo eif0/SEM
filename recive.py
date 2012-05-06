@@ -21,8 +21,9 @@
 # bit 13 :	
 #		es '0' si es la primer parte de una serie
 #		es '1' si es una parte intermedia en un envio de una serie
-#		es '2' si es el primer paquete o una parte intermedia de un archivo
+#		es '2' si es una parte intermedia de un archivo
 #		es '3' si es el ultimo paquete de datos de un archivo
+#		es '4' si es el primer paquete de datos de un archivo
 #		es '5' si es un envio de una sola parte
 #		es '9' si es la ultima parte de un envio de una serie 
 #
@@ -36,6 +37,7 @@
 import sys
 import getopt
 import logging
+import time
 
 # Definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
@@ -49,6 +51,7 @@ interface='eth0'
 archivo='message.txt'
 passwd='20121357'
 name ='test'
+recibido = '/tmp/test'
 
 # Levanta los valores de los parametros
 for code,param in opts:
@@ -73,8 +76,8 @@ def monitor_callback(pkt):
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
 			print >>f,'[',pkt[ICMP].load[8:12],']: ', # Imprimo en el log el nombre del usuario
 			print >>f, data,
-		# Me fijo para no loguear los datos que son parte de un envio de archivo
-		elif (pkt[ICMP].load[12:13] != '2') and (pkt[ICMP].load[12:13] != '3'):
+		# Me fijo para loguear los datos que pertenecen a la parte intermedia o final
+		elif (pkt[ICMP].load[12:13] == '1') or (pkt[ICMP].load[12:13] != '9'):
 			print >>f,data,
 		f.close()
 
@@ -86,9 +89,33 @@ def monitor_callback(pkt):
 			if lastline[0:11] != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
 			f.close()
+		
+		
+		
+		# Si me llega una parte inicial de un archivo
+		elif pkt[ICMP].load[12:13] == '4':
+			data = pkt[ICMP].load[13:]
+			tempfile = str(int(time.time()))
+			recibido = '/tmp/'+tempfile
+			f = open(recibido, 'a')
+			print >>f, data,
+			f.close()
+		
+		# Si me llega una parte intermedia de un archivo
+		elif pkt[ICMP].load[12:13] == '2':
+			data = pkt[ICMP].load[13:]
+			f = open(recibido, 'a')
+			print >>f, data,
+			f.close()
+			
+		# Si me llega la ultima parte de un archivo
 		elif pkt[ICMP].load[12:13] == '3':
-			print '\n\n		***[ Se completo la transferencia del archivo ]***\n\n'
-
+			data = pkt[ICMP].load[13:]
+			f = open(recibido, 'a')
+			print >>f, data,
+			f.close()
+			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
+			print '		|||| Transfer ID: '+tempfile+' ||||\n\n\n'
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)

@@ -66,6 +66,9 @@ INSIDE APP PARAMS:
       
  :s!
       Start Simple Mode (Stop Verbose)
+      
+ :send!
+      Send a File
              
 			
 '''
@@ -135,8 +138,12 @@ def sendtxt(txt,tipo):
 		# Me fijo si lo que se manda es un archivo
 		elif tipo == 'f':
 			
-			# Me fijo que no sea el ultimo paquete correspondiente al archivo
-			if a+1 != count:
+			# Me fijo que sea el primer paquete correspondiente al archivo
+			if a == 0:
+				payload = passwd + name +'4'+ txt[first:last]
+			
+			# Me fijo que no sea el primer ni el ultimo paquete correspondiente al archivo
+			elif (a+1 != count) and (a != 0):
 				payload = passwd + name +'2'+ txt[first:last]
 			
 			# Si es la ultima parte de un archivo
@@ -158,11 +165,13 @@ def sendtxt(txt,tipo):
 def showhelp():
 	print '''
 		
- :h!   Show this help
- :q!   Exit Program
- :c!   Clear Screen
- :v!   Start Verbose Mode
- :s!   Start Simple Mode (Stop Verbose)
+ :h!       Show this help
+ :q!       Exit Program
+ :c!       Clear Screen
+ :v!       Start Verbose Mode
+ :s!       Start Simple Mode (Stop Verbose
+ :send!    Send a File
+ :conv!    Convert a recive File
 		
 		'''
 
@@ -221,6 +230,14 @@ while True:
 		txt = fdest.read()
 		fdest.close()
 		sendtxt(txt,'f')
+		continue
+		
+		
+	elif txt.strip() ==':conv!':		# Convert a recived File
+		transid = raw_input('Transfer ID: ')
+		source = '/tmp/'+transid
+		dest = raw_input('Save in (full path): ')
+		decoder(source,dest)
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
