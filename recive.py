@@ -98,8 +98,7 @@ def monitor_callback(pkt):
 		# Si me llega una parte inicial de un archivo
 		elif pkt[ICMP].load[12:13] == '4':
 			data = pkt[ICMP].load[13:]
-			tempfile = str(int(time.time()))
-			recibido = '/tmp/'+tempfile
+			recibido = '/tmp/sem_recived'
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -107,7 +106,7 @@ def monitor_callback(pkt):
 		# Si me llega una parte intermedia de un archivo
 		elif pkt[ICMP].load[12:13] == '2':
 			data = pkt[ICMP].load[13:]
-			recibido = '/tmp/'+tempfile
+			recibido = '/tmp/sem_recived'
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -115,11 +114,11 @@ def monitor_callback(pkt):
 		# Si me llega la ultima parte de un archivo
 		elif pkt[ICMP].load[12:13] == '3':
 			data = pkt[ICMP].load[13:]
+			recibido = '/tmp/sem_recived'
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
-			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
-			print '		|||| Transfer ID: '+recibido+' ||||\n\n\n'
+			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
 
 
 # empezamos a escuchar en la interface definida por parametro
