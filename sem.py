@@ -180,10 +180,12 @@ def showhelp():
 		
 		'''
 
-def getmd5(file):
-	os.system('md5sum '+file+' > '+file+'.sum')
-
-
+def getmd5(file_sum):
+	os.system('md5sum '+file_sum+' > '+fie_sum+'.sum')
+	fsum = open(file_sum, "r")
+	md5 = fsum.read()
+	fdest.close()
+	return md5
 
 
 # Comienza la interfaz del usr
@@ -250,8 +252,8 @@ while True:
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
 		print '\n\n\n		***[ File Successfully Saved! ]***'
-		print '		            - path: '+dest+' -\n'
-		print '		   - md5sum: '+str(getmd5(dest))+' -\n\n\n'
+		print '		      - path: '+dest+' -\n'
+		print '		- md5sum: '+str(getmd5(dest))+' -\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
