@@ -86,11 +86,11 @@ INSIDE APP PARAMS:
 
 # Funcion que encodea en base64 los archivos para enviarlos
 def encoder(source,dest): 
-	code = os.system('base64 '+source+' > '+dest)
+	os.system('base64 '+source+' > '+dest)
 
 # Funcion que decodea base64 para poder volver a convertirlo en el archivo original
 def decoder(source,dest):
-	code = os.system('base64 -d '+source+' > '+dest)
+	os.system('base64 -d '+source+' > '+dest)
 
 # Funcion que manda el texto que se le pasa por parametro
 # Si (tipo) es 'f' estamos mandando un archivo, si es 't' estamos mandando un string (chat)
@@ -181,8 +181,7 @@ def showhelp():
 		'''
 
 def getmd5(file):
-	md5 = os.system('md5sum '+file)
-	return md5
+	os.system('md5sum '+file+' > '+file+'.sum')
 
 
 
