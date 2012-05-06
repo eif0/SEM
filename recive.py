@@ -53,7 +53,6 @@ passwd='20121357'
 name ='test'
 tempfile = str(int(time.time()))
 recibido = '/tmp/'+tempfile
-print 'parte inicial: '+recibido
 
 
 # Levanta los valores de los parametros
@@ -123,11 +122,11 @@ def monitor_callback(pkt):
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
-			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
-			print 'viejo: '+recibido
+			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
+			print '		|||| Transfer ID: '+tempfile+' ||||\n\n\n'
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
-			print 'nuevo: '+recibido
+
 
 
 # empezamos a escuchar en la interface definida por parametro
