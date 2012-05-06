@@ -21,6 +21,8 @@
 # bit 13 :	
 #		es '0' si es la primer parte de una serie
 #		es '1' si es una parte intermedia en un envio de una serie
+#		es '2' si es el primer paquete o una parte intermedia de un archivo
+#		es '3' si es el ultimo paquete de datos de un archivo
 #		es '5' si es un envio de una sola parte
 #		es '9' si es la ultima parte de un envio de una serie 
 #
@@ -71,7 +73,8 @@ def monitor_callback(pkt):
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
 			print >>f,'[',pkt[ICMP].load[8:12],']: ', # Imprimo en el log el nombre del usuario
 			print >>f, data,
-		else:
+		# Me fijo para no loguear los datos que son parte de un envio de archivo
+		elif (pkt[ICMP].load[12:13] != '2') and (pkt[ICMP].load[12:13] != '3'):
 			print >>f,data,
 		f.close()
 
@@ -83,7 +86,8 @@ def monitor_callback(pkt):
 			if lastline[0:11] != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
 			f.close()
-
+		elif pkt[ICMP].load[12:13] == '3':
+			print '		***[ Se completo la descarga del archivo ]***'
 
 
 # empezamos a escuchar en la interface definida por parametro

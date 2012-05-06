@@ -71,18 +71,21 @@ INSIDE APP PARAMS:
 '''
 		exit()
 
-	if code in ['-v','--verbose']:
+	elif code in ['-v','--verbose']:
 		verbose = True
 
+# Comenzamos a definir las funciones que van a hacer todo el trabajo
 
-
-def encoder(source,dest):
+# Funcion que encodea en base64 los archivos para enviarlos
+def encoder(source,dest): 
 	code = os.system('base64 '+source+' > '+dest)
 
+# Funcion que decodea base64 para poder volver a convertirlo en el archivo original
 def decoder(source,dest):
 	code = os.system('base64 -d '+source+' > '+dest)
 
-def sendtxt(txt):
+# Funcion que manda el texto que se le pasa por parametro
+def sendtxt(txt,tipo):
 
 	# a partir de aca empieza el armado del paquete y el envio
 
@@ -109,22 +112,37 @@ def sendtxt(txt):
 		if verbose:
 			print "%s " %(a + 1),
 
-		# si es la primer parte del envio, y NO es la unica pongo el bit 13 en '0'
-		if (a == 0) and (a+1 != count):
-			payload = passwd + name +'0'+ txt[first:last]
+		# Me fijo si se esta enviando un chat (texto)
+		if tipo == 't':
+		
+			# si es la primer parte del envio, y NO es la unica pongo el bit 13 en '0'
+			if (a == 0) and (a+1 != count):
+				payload = passwd + name +'0'+ txt[first:last]
 
-		# si es la primer parte del envio, y SI es la unica pongo el bit 13 en '5'
-		elif (a == 0) and (a+1 == count):
-			payload = passwd + name +'5'+ txt[first:last]
+			# si es la primer parte del envio, y SI es la unica pongo el bit 13 en '5'
+			elif (a == 0) and (a+1 == count):
+				payload = passwd + name +'5'+ txt[first:last]
 
-		# si es la ultima parte del envio pongo el bit 13 en '9'
-		elif a+1 == count:
-			payload = passwd + name +'9'+ txt[first:last]
+			# si es la ultima parte del envio pongo el bit 13 en '9'
+			elif a+1 == count:
+				payload = passwd + name +'9'+ txt[first:last]
 
-		# si no es la primer parte ni la ultima pongo el bit 13 en '1'
-		else:
-			payload = passwd + name +'1'+ txt[first:last]
-
+			# si no es la primer parte ni la ultima pongo el bit 13 en '1'
+			else:
+				payload = passwd + name +'1'+ txt[first:last]
+		
+		# Me fijo si lo que se manda es un archivo
+		elif tipo == 'f':
+			
+			# Me fijo que no sea el ultimo paquete correspondiente al archivo
+			if a+1 != count:
+				payload = passwd + name +'2'+ txt[first:last]
+			
+			# Si es la ultima parte de un archivo
+			else:
+				payload = passwd + name +'3'+ txt[first:last]
+		
+		
 		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
 		# enviamos el paquete
@@ -135,6 +153,7 @@ def sendtxt(txt):
 	if verbose:
 		print ']'
 
+# Funcion que muestra la ayuda
 def showhelp():
 	print '''
 		
@@ -146,10 +165,7 @@ def showhelp():
 		
 		'''
 
-
-
-
-
+# Comienza la interfaz del usr
 
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [test]: ')
@@ -184,7 +200,7 @@ rec_pid = rec_p.pid
 # Loop para chatear
 print '\nTo exit write: \':q!\''
 print 'To have help write: \':h!\'\n\n'
-txt='void'
+
 while True:
 
 	# Leemos el texto del usuario
@@ -196,7 +212,6 @@ while True:
 		os.system('clear')
 		continue
 		
-		
 	elif txt.strip() ==':send!':		# Send File
 		source = raw_input('File Path (no spaces): ')
 		dest = '/tmp/semSharedFile'
@@ -204,10 +219,8 @@ while True:
 		fdest = open(dest, "r")
 		txt = fdest.read()
 		fdest.close()
-		sendtxt(txt)
+		sendtxt(txt,'f')
 		continue
-		
-		
 		
 	elif txt.strip() ==':h!':		# Show Help
 		showhelp()
@@ -224,14 +237,14 @@ while True:
 		verbose = False
 		continue
 	
-	else:
+	else:							# Send User Text
 		txt=txt+'\n'
-		sendtxt(txt)				# Send User Text
+		sendtxt(txt,t)				
 	
 	
 	
 
-# Mato el proceso que escucha
+# Mato el proceso que escucha los paquetes que llegan y los loguea/muestra por pantalla
 os.system('kill -9 '+str(rec_pid))
 print '\n\nGood Bye!\n\n'
 
