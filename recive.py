@@ -51,6 +51,9 @@ interface='eth0'
 archivo='message.txt'
 passwd='20121357'
 name ='test'
+tempfile = str(int(time.time()))
+recibido = '/tmp/'+tempfile
+print 'parte inicial: '+recibido
 
 
 # Levanta los valores de los parametros
