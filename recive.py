@@ -87,7 +87,7 @@ def monitor_callback(pkt):
 				print '					<< '+lastline[11:]
 			f.close()
 		elif pkt[ICMP].load[12:13] == '3':
-			print '		***[ Se completo la descarga del archivo ]***'
+			print '\n\n		***[ Se completo la descarga del archivo ]***\n\n'
 
 
 # empezamos a escuchar en la interface definida por parametro
