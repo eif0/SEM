@@ -25,7 +25,6 @@
 #		es '3' si es el ultimo paquete de datos de un archivo
 #		es '4' si es el primer paquete de datos de un archivo
 #		es '5' si es un envio de una sola parte
-#		es '8' si es el md5sum de un archivo
 #		es '9' si es la ultima parte de un envio de una serie 
 #
 # bit 14-.. :
