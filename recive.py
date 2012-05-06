@@ -118,7 +118,7 @@ def monitor_callback(pkt):
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
-			print '		|||| Transfer ID: '+tempfile+' ||||\n\n\n'
+#			print '		|||| Transfer ID: '+tempfile+' ||||\n\n\n'
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
