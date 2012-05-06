@@ -184,7 +184,7 @@ def getmd5(file_sum):
 	os.system('md5sum '+file_sum+' > '+file_sum+'.sum')
 	fsum = open(file_sum, "r")
 	md5 = fsum.read()
-	fdest.close()
+	fsum.close()
 	return md5
 
 
