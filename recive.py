@@ -119,6 +119,8 @@ def monitor_callback(pkt):
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
+			tempfile = str(int(time.time()))
+			recibido = '/tmp/'+tempfile
 
 
 # empezamos a escuchar en la interface definida por parametro
