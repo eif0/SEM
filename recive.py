@@ -51,7 +51,7 @@ interface='eth0'
 archivo='message.txt'
 passwd='20121357'
 name ='test'
-recibido = '/tmp/SEMrecived'
+
 
 # Levanta los valores de los parametros
 for code,param in opts:
@@ -107,6 +107,7 @@ def monitor_callback(pkt):
 		# Si me llega una parte intermedia de un archivo
 		elif pkt[ICMP].load[12:13] == '2':
 			data = pkt[ICMP].load[13:]
+			recibido = '/tmp/'+tempfile
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -119,8 +120,7 @@ def monitor_callback(pkt):
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			print '		|||| Transfer ID: '+recibido+' ||||\n\n\n'
-			tempfile = str(int(time.time()))
-			recibido = '/tmp/'+tempfile
+
 
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
