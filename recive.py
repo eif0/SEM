@@ -124,7 +124,12 @@ def monitor_callback(pkt):
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			print '		            - Transfer ID: '+tempfile+' -\n'
+			
+			if pkt[ICMP].load[8:12] != name:
 			print '		        { to get the file execute \':conv!\'}\n\n\n'
+			else:
+				print '\n\n\n'
+			
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
