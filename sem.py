@@ -137,7 +137,7 @@ def sendtxt(txt):
 	if verbose:
 		print ']'
 
-def showhelp()
+def showhelp():
 	print '''
 		
  :h!   Show this help
