@@ -252,7 +252,7 @@ while True:
 		decoder(source,dest)
 		print '\n\n\nSuccessfully Saved!'
 		print 'Your file is here: '+dest
-		print 'Local File md5sum: '+getmd5(dest)+'\n\n\n'
+		print 'Local File md5sum: '+str(getmd5(dest))+'\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
