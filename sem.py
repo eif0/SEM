@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #  
-# SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol.
+# SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
 # by renateitor
 #
 # Last release available in:
@@ -32,7 +32,7 @@ opts, extra = getopt.getopt(sys.argv[1:], 'hv', ['help','verbose'])
 for code,param in opts:
 	if code in ['-h','--help']:
 		print '''
-SEM (Security Enhanced Messaging) is a collaborative PoC for implementing Cover Channels over ICMP protocol.
+SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
 Last release available in: https://github.com/renateitor/SEM
 
 *** Must run as root ***
@@ -191,7 +191,7 @@ def getmd5(file_sum):
 
 # Comienza la interfaz del usr
 
-# Blanqueamos el archivo donde se van a almacenar los logs de esta sesion
+# Creamos el archivo donde se van a almacenar los logs de esta sesion
 os.system('echo \'\' > message.txt')
 
 # Levanto los parametros necesarios para la comunicacion
@@ -247,6 +247,7 @@ while True:
 		txt = fdest.read()
 		fdest.close()
 		sendtxt(txt,'f') # Mando el archivo
+		# Borro el archivo temporal donde guarde el base64 del archivo que quiero enviar
 		os.system('rm -f /tmp/semSharedFile')
 		
 		continue
@@ -254,12 +255,14 @@ while True:
 		
 	elif txt.strip() ==':save!':		# Save a recived File
 		transid = raw_input('Transfer ID: ')
-		source = '/tmp/'+transid
+		# Lugar donde se habia almacenado temporalmente el base64 del archivo que nos mandaron
+		source = '/tmp/'+transid     
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
 		print '\n\n\n		***[ File Successfully Saved! ]***'
 		print '		      - path: '+dest+' -\n'
-		print '         md5sum: '+str(getmd5(dest))+'\n\n\n'
+		# Mostramos el md5sum del archivo que nos llego
+		print '         md5sum: '+str(getmd5(dest))+'\n\n\n'  
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
@@ -286,6 +289,8 @@ while True:
 
 # Mato el proceso que escucha los paquetes que llegan y los loguea/muestra por pantalla
 os.system('kill -9 '+str(rec_pid))
+
+# Creo el archivo donde van a quedar guardados los logs
 logfilename = str(int(time.time()))
 os.system('mv message.txt chatlog_'+logfilename[-6:-1]+'.txt')
 print '\n\n\n*** [ Session Log File: chatlog_'+logfilename[-6:-1]+'.txt ] ***'
