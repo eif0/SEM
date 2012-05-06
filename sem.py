@@ -80,6 +80,8 @@ INSIDE APP PARAMS:
 	elif code in ['-v','--verbose']:
 		verbose = True
 
+
+
 # Comenzamos a definir las funciones que van a hacer todo el trabajo
 
 # Funcion que encodea en base64 los archivos para enviarlos
@@ -178,6 +180,13 @@ def showhelp():
 		
 		'''
 
+def getmd5(file):
+	md5 = os.system('md5sum '+file)
+	return md5
+
+
+
+
 # Comienza la interfaz del usr
 
 # Levanto los parametros necesarios para la comunicacion
@@ -232,7 +241,7 @@ while True:
 		fdest = open(dest, "r")
 		txt = fdest.read()
 		fdest.close()
-		sendtxt(txt,'f')
+		sendtxt(txt,'f') # Mando el archivo
 		continue
 		
 		
@@ -242,7 +251,8 @@ while True:
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
 		print '\n\n\nSuccessfully Saved!'
-		print 'Your file is here: '+dest+'\n\n\n'
+		print 'Your file is here: '+dest
+		print 'Local File md5sum: '+getmd5(dest)+'\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
