@@ -257,7 +257,7 @@ while True:
 		decoder(source,dest)
 		print '\n\n\n		***[ File Successfully Saved! ]***'
 		print '		      - path: '+dest+' -\n'
-		print '     - md5sum: '+str(getmd5(dest))+' -\n\n\n'
+		print '         md5sum: '+str(getmd5(dest))+'\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
