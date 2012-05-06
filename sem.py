@@ -239,7 +239,7 @@ while True:
 	
 	else:							# Send User Text
 		txt=txt+'\n'
-		sendtxt(txt,t)				
+		sendtxt(txt,'t')				
 	
 	
 	
