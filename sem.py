@@ -182,7 +182,7 @@ def showhelp():
 
 def getmd5(file_sum):
 	os.system('md5sum '+file_sum+' > '+file_sum+'.sum')
-	fsum = open(file_sum, "r")
+	fsum = open(file_sum+'.sum', "r")
 	md5 = fsum.read()
 	fsum.close()
 	return md5
