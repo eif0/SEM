@@ -124,7 +124,7 @@ def monitor_callback(pkt):
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			print '		            - Transfer ID: '+tempfile+' -\n'
-			print '		         { to get the file execute \':conv!\'}\n\n\n'
+			print '		        { to get the file execute \':conv!\'}\n\n\n'
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
