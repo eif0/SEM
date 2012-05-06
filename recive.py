@@ -104,7 +104,7 @@ def monitor_callback(pkt):
 			except NameError:
 				tempfile = str(int(time.time()))
 				recibido = '/tmp/'+tempfile
-			
+				print 'primera parte: '+recibido
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -118,6 +118,7 @@ def monitor_callback(pkt):
 			except NameError:
 				tempfile = str(int(time.time()))
 				recibido = '/tmp/'+tempfile
+				print 'parte intermedia: '+recibido
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -132,15 +133,15 @@ def monitor_callback(pkt):
 			except NameError:
 				tempfile = str(int(time.time()))
 				recibido = '/tmp/'+tempfile
+				print 'ultima parte: '+recibido
 
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
-			print 'antes: '+recibido
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
-			print 'ahora: '+recibido
+			print 'blanqueo: '+recibido
 
 
 # empezamos a escuchar en la interface definida por parametro
