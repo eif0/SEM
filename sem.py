@@ -84,8 +84,6 @@ def decoder(source,dest):
 
 def sendtxt(txt):
 
-	txt=txt+'\n'
-	
 	# a partir de aca empieza el armado del paquete y el envio
 
 	# construimos la capa 3 del paquete (IP) 
@@ -201,8 +199,12 @@ while True:
 		
 	elif txt.strip() ==':send!':		# Send File
 		source = raw_input('File Path (no spaces): ')
-		dest = '/tmp/SemSharedFile'
+		dest = '/tmp/semSharedFile'
 		encoder(source,dest)
+		fdest = open(dest, "r")
+		txt = fdest.read()
+		fdest.close()
+		sendtxt(txt)
 		continue
 		
 		
@@ -221,7 +223,9 @@ while True:
 	elif txt.strip() ==':s!':		# Simple Mode
 		verbose = False
 		continue
+	
 	else:
+		txt=txt+'\n'
 		sendtxt(txt)				# Send User Text
 	
 	
