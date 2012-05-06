@@ -169,7 +169,7 @@ def showhelp():
  :q!       Exit Program
  :c!       Clear Screen
  :v!       Start Verbose Mode
- :s!       Start Simple Mode (Stop Verbose
+ :s!       Start Simple Mode (Stop Verbose)
  :send!    Send a File
  :conv!    Convert a recive File
 		

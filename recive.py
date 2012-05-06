@@ -72,12 +72,15 @@ def monitor_callback(pkt):
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = pkt[ICMP].load[13:]
+		
+		
 		# Verifico si es la primer parte de una serie o un paquete unico
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
 			print >>f,'[',pkt[ICMP].load[8:12],']: ', # Imprimo en el log el nombre del usuario
 			print >>f, data,
+		
 		# Me fijo para loguear los datos que pertenecen a la parte intermedia o final
-		elif (pkt[ICMP].load[12:13] == '1') or (pkt[ICMP].load[12:13] != '9'):
+		elif (pkt[ICMP].load[12:13] == '1') or (pkt[ICMP].load[12:13] == '9'):
 			print >>f,data,
 		f.close()
 
