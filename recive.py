@@ -98,6 +98,8 @@ def monitor_callback(pkt):
 		# Si me llega una parte inicial de un archivo
 		elif pkt[ICMP].load[12:13] == '4':
 			data = pkt[ICMP].load[13:]
+			tempfile = str(int(time.time()))
+			recibido = '/tmp/'+tempfile
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -120,6 +122,5 @@ def monitor_callback(pkt):
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
-recibido = '/tmp/SEMrecived'
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
