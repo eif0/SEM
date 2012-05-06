@@ -120,5 +120,6 @@ def monitor_callback(pkt):
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
+recibido = '/tmp/SEMrecived'
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)
