@@ -287,6 +287,6 @@ while True:
 # Mato el proceso que escucha los paquetes que llegan y los loguea/muestra por pantalla
 os.system('kill -9 '+str(rec_pid))
 logfilename = str(int(time.time())
-os.system('kill -9 '+str(rec_pid))
+#os.system('kill -9 '+str(rec_pid))
 print '\n\nGood Bye!\n\n'
 
