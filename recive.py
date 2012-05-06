@@ -126,7 +126,7 @@ def monitor_callback(pkt):
 			
 			if pkt[ICMP].load[8:12] != name:
 				print '		            - Transfer ID: '+tempfile+' -\n'
-				print '		        { to get the file execute \':conv!\' }\n\n\n'
+				print '		        { to get the file execute \':save!\' }\n\n\n'
 			else:
 				print '\n\n\n'
 			

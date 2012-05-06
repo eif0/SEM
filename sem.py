@@ -69,6 +69,9 @@ INSIDE APP PARAMS:
       
  :send!
       Send a File
+      
+ :save!
+      Save a Recived a File      
              
 			
 '''
@@ -171,7 +174,7 @@ def showhelp():
  :v!       Start Verbose Mode
  :s!       Start Simple Mode (Stop Verbose)
  :send!    Send a File
- :conv!    Convert a recive File
+ :save!    save a recived File
 		
 		'''
 
@@ -233,12 +236,12 @@ while True:
 		continue
 		
 		
-	elif txt.strip() ==':conv!':		# Convert a recived File
+	elif txt.strip() ==':save!':		# Save a recived File
 		transid = raw_input('Transfer ID: ')
 		source = '/tmp/'+transid
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
-		print '\n\n\nConvertion done!'
+		print '\n\n\nSuccessfully Saved!'
 		print 'Your file is here: '+dest+'\n\n\n'
 		continue
 		
