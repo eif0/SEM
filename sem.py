@@ -85,6 +85,7 @@ def decoder(source,dest):
 	code = os.system('base64 -d '+source+' > '+dest)
 
 # Funcion que manda el texto que se le pasa por parametro
+# Si (tipo) es 'f' estamos mandando un archivo, si es 't' estamos mandando un string (chat)
 def sendtxt(txt,tipo):
 
 	# a partir de aca empieza el armado del paquete y el envio
