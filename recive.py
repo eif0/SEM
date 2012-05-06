@@ -123,7 +123,7 @@ def monitor_callback(pkt):
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
-			print '		        [ Transfer ID: '+tempfile+' ]\n\n\n'
+			print '		            - Transfer ID: '+tempfile+' -\n\n\n'
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
