@@ -250,9 +250,9 @@ while True:
 		source = '/tmp/'+transid
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
-		print '\n\n\nSuccessfully Saved!'
-		print 'Your file is here: '+dest
-		print 'Local File md5sum: '+str(getmd5(dest))+'\n\n\n'
+		print '\n\n\n		***[ File Successfully Saved! ]***'
+		print '		            - path: '+dest+' -\n'
+		print '		   - md5sum: '+str(getmd5(dest))+' -\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
