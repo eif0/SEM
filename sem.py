@@ -185,6 +185,7 @@ def getmd5(file_sum):
 	fsum = open(file_sum+'.sum', "r")
 	md5 = fsum.read()
 	fsum.close()
+	os.system('rm -f '+file_sum+'.sum')
 	return md5
 
 
