@@ -116,7 +116,8 @@ def monitor_callback(pkt):
 			try:
 				recibido
 			except NameError:
-				print 'ERROR!'
+				tempfile = str(int(time.time()))
+				recibido = '/tmp/'+tempfile
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -129,7 +130,8 @@ def monitor_callback(pkt):
 			try:
 				recibido
 			except NameError:
-				print 'ERROR!'
+				tempfile = str(int(time.time()))
+				recibido = '/tmp/'+tempfile
 
 			f = open(recibido, 'a')
 			print >>f, data,
