@@ -70,6 +70,8 @@ for code,param in opts:
      
 # Definimos la funcion que se va a llamar en la llegada de cada paquete
 def monitor_callback(pkt):
+	global recibido
+	global tempfile
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
@@ -102,12 +104,6 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '4':
 			data = pkt[ICMP].load[13:]
 			
-			try:
-				recibido
-			except NameError:
-				tempfile = str(int(time.time()))
-				recibido = '/tmp/'+tempfile
-				print 'primera parte: '+recibido
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
@@ -115,13 +111,6 @@ def monitor_callback(pkt):
 		# Si me llega una parte intermedia de un archivo
 		elif pkt[ICMP].load[12:13] == '2':
 			data = pkt[ICMP].load[13:]
-
-			try:
-				recibido
-			except NameError:
-				tempfile = str(int(time.time()))
-				recibido = '/tmp/'+tempfile
-				print 'parte intermedia: '+recibido
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -131,20 +120,14 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '3':
 			data = pkt[ICMP].load[13:]
 
-			try:
-				recibido
-			except NameError:
-				tempfile = str(int(time.time()))
-				recibido = '/tmp/'+tempfile
-				print 'ultima parte: '+recibido
-
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
+			print 'viejo: '+recibido
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
-			print 'blanqueo: '+recibido
+			print 'nuevo: '+recibido
 
 
 # empezamos a escuchar en la interface definida por parametro
