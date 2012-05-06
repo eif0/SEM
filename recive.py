@@ -99,14 +99,11 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '4':
 			data = pkt[ICMP].load[13:]
 			
-			
 			try:
 				recibido
 			except NameError:
-				recibido = '/tmp/'+str(int(time.time()))
-			else:
-				pass # 'recibido' exists
-			
+				tempfile = str(int(time.time()))
+				recibido = '/tmp/'+tempfile
 			
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -116,14 +113,10 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '2':
 			data = pkt[ICMP].load[13:]
 
-
 			try:
 				recibido
 			except NameError:
-				recibido = '/tmp/'+str(int(time.time()))
-			else:
-				pass # 'recibido' exists
-
+				print 'ERROR!'
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -133,21 +126,18 @@ def monitor_callback(pkt):
 		elif pkt[ICMP].load[12:13] == '3':
 			data = pkt[ICMP].load[13:]
 
-
 			try:
 				recibido
 			except NameError:
-				recibido = '/tmp/'+str(int(time.time()))
-			else:
-				pass # 'recibido' exists
-
+				print 'ERROR!'
 
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***\n\n\n'
 			print 'antes: '+recibido
-			recibido = '/tmp/'+str(int(time.time()))
+			tempfile = str(int(time.time()))
+			recibido = '/tmp/'+tempfile
 			print 'ahora: '+recibido
 
 
