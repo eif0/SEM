@@ -238,6 +238,8 @@ while True:
 		source = '/tmp/'+transid
 		dest = raw_input('Save in (full path): ')
 		decoder(source,dest)
+		print '\n\n\nConvertion done!'
+		print 'Your file is here: '+dest+'\n\n\n'
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
