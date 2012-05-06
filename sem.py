@@ -74,73 +74,16 @@ INSIDE APP PARAMS:
 	if code in ['-v','--verbose']:
 		verbose = True
 
-# Levanto los parametros necesarios para la comunicacion
-name = raw_input('Name(4-char) [test]: ')
-target = raw_input('Target device [192.168.1.71]: ')
-passwd = raw_input('Key for the communication(8-char) [20121357]: ')
-interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
-# Seteo los defaults en caso de que el usuario no complete algun parametro
-if name == '':
-	name = 'test'
-if target == '':
-	target = '192.168.1.71'
-if passwd == '':
-	passwd = '20121357'
-if interface == '':
-	interface = 'eth0'
 
-# Trunco las variables en caso de que excedan el tamanio max
-name = name[0:4]
-passwd = passwd[0:8]
+def encoder(source,dest):
+	code = os.system('base64 '+source+' > '+dest)
 
-# Completo las variables en caso de que sean mas cortas que el min
-while name.__len__() < 4:
-	name = name+'_'
-while passwd.__len__() < 8:
-	passwd = passwd+'_'
-	
-# Dejo monitoreando en background para la recepcion de mensajes
-rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'&'])
-rec_pid = rec_p.pid
+def decoder(source,dest):
+	code = os.system('base64 -d '+source+' > '+dest)
 
-# Loop para chatear
-print '\nTo exit write: \':q!\''
-print 'To have help write: \':h!\'\n\n'
-txt='void'
-while True:
+def sendtxt(txt):
 
-	# Leemos el texto del usuario
-	txt=raw_input('')
-	
-	# Parametros internos
-	if txt.strip() ==':c!':		# Clear Screen
-		os.system('clear')
-		continue
-		
-	if txt.strip() ==':h!':		# Show Help
-		print '''
-		
- :h!   Show this help
- :q!   Exit Program
- :c!   Clear Screen
- :v!   Start Verbose Mode
- :s!   Start Simple Mode (Stop Verbose)
-		
-		'''
-		continue
-		
-	if txt.strip()==':q!':		# Exit
-		break
-	
-	if txt.strip() ==':v!':		# Verbose Mode
-		verbose = True
-		continue
-		
-	if txt.strip() ==':s!':		# Simple Mode
-		verbose = False
-		continue
-	
 	txt=txt+'\n'
 	
 	# a partir de aca empieza el armado del paquete y el envio
@@ -193,6 +136,93 @@ while True:
 	
 	if verbose:
 		print ']'
+
+def showhelp()
+	print '''
+		
+ :h!   Show this help
+ :q!   Exit Program
+ :c!   Clear Screen
+ :v!   Start Verbose Mode
+ :s!   Start Simple Mode (Stop Verbose)
+		
+		'''
+
+
+
+
+
+
+# Levanto los parametros necesarios para la comunicacion
+name = raw_input('Name(4-char) [test]: ')
+target = raw_input('Target device [192.168.1.71]: ')
+passwd = raw_input('Key for the communication(8-char) [20121357]: ')
+interface = raw_input('Interface for the communication (listening) [eth0]: ')
+
+# Seteo los defaults en caso de que el usuario no complete algun parametro
+if name == '':
+	name = 'test'
+if target == '':
+	target = '192.168.1.71'
+if passwd == '':
+	passwd = '20121357'
+if interface == '':
+	interface = 'eth0'
+
+# Trunco las variables en caso de que excedan el tamanio max
+name = name[0:4]
+passwd = passwd[0:8]
+
+# Completo las variables en caso de que sean mas cortas que el min
+while name.__len__() < 4:
+	name = name+'_'
+while passwd.__len__() < 8:
+	passwd = passwd+'_'
+	
+# Dejo monitoreando en background para la recepcion de mensajes
+rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'&'])
+rec_pid = rec_p.pid
+
+# Loop para chatear
+print '\nTo exit write: \':q!\''
+print 'To have help write: \':h!\'\n\n'
+txt='void'
+while True:
+
+	# Leemos el texto del usuario
+	txt=raw_input('')
+	
+	# Parametros internos
+	
+	if txt.strip() ==':c!':		# Clear Screen
+		os.system('clear')
+		continue
+		
+		
+	elif txt.strip() ==':send!':		# Send File
+		source = raw_input('File Path (no spaces): ')
+		dest = '/tmp/SemSharedFile'
+		encoder(source,dest)
+		continue
+		
+		
+		
+	elif txt.strip() ==':h!':		# Show Help
+		showhelp()
+		continue
+		
+	elif txt.strip()==':q!':		# Exit
+		break
+	
+	elif txt.strip() ==':v!':		# Verbose Mode
+		verbose = True
+		continue
+		
+	elif txt.strip() ==':s!':		# Simple Mode
+		verbose = False
+		continue
+	else:
+		sendtxt(txt)				# Send User Text
 	
 	
 	
