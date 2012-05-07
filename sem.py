@@ -162,7 +162,7 @@ def sendtxt(txt,tipo):
 			# Me fijo que no sea la ultima parte del sum
 			if a+1 != count:
 				payload = passwd + name +'7'+ txt[first:last]
-			elif:
+			else:
 				payload = passwd + name +'8'+ txt[first:last]
 			
 			
