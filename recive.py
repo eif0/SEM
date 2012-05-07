@@ -148,7 +148,7 @@ def monitor_callback(pkt):
 			fdest = open(recibido+'.sum', "r")
 			remotemd5sum = fdest.read()
 			fdest.close()
-			print ' 		 Remote File md5sum: '+remotemd5sum
+			print '      Remote File md5sum: '+remotemd5sum
 			print '		        { to get the file execute \':save!\' }\n\n\n'
 			
 			
