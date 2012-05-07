@@ -278,7 +278,7 @@ while True:
 		print '\n\n\n		***[ File Successfully Saved! ]***'
 		print '		      - path: '+dest+' -\n'
 		# Mostramos el md5sum del archivo que nos llego
-		print '      Local File md5sum: '+str(getmd5(dest))+'\n\n\n'  
+		print '      Local File md5sum: '+str(getmd5(dest)).split(' ')[0]+'\n\n\n'  
 		continue
 		
 	elif txt.strip() ==':h!':		# Show Help
