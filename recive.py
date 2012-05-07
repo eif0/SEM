@@ -25,6 +25,8 @@
 #		es '3' si es el ultimo paquete de datos de un archivo
 #		es '4' si es el primer paquete de datos de un archivo
 #		es '5' si es un envio de una sola parte
+#		es '7' si es un envio de una primera parte o una parte intermedia de un md5sum
+#		es '8' si es un envio de una ultima parte de un md5sum
 #		es '9' si es la ultima parte de un envio de una serie 
 #
 # bit 14-.. :
@@ -133,7 +135,23 @@ def monitor_callback(pkt):
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
-
-
+		# Si llega la primer parte o una parte intermedia de un md5sum y no es un echo-reply
+		elif (pkt[ICMP].load[12:13] == '7') and (pkt[ICMP].load[8:12] != name):
+			f = open(recibido+'.sum', 'a')
+			print >>f, data,
+			f.close()
+			
+		# Si llega la ultima parte del md5sum y no es un echo-reply
+		elif (pkt[ICMP].load[12:13] == '8') and (pkt[ICMP].load[8:12] != name):
+			f = open(recibido+'.sum', 'a')
+			print >>f, data,
+			f.close()
+			fdest = open(recibido+'.sum', "r")
+			remotemd5sum = fdest.read()
+			fdest.close()
+			print ' Remote File md5sum: '+remotemd5sum
+			
+			
+			
 # empezamos a escuchar en la interface definida por parametro
 pkts = sniff(iface=interface, prn=monitor_callback)

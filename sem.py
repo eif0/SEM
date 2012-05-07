@@ -156,6 +156,18 @@ def sendtxt(txt,tipo):
 			else:
 				payload = passwd + name +'3'+ txt[first:last]
 		
+		# Me fijo si lo que se manda es un md5sum
+		elif tipo == 's':
+			
+			# Me fijo que no sea la ultima parte del sum
+			if a+1 != count:
+				payload = passwd + name +'7'+ txt[first:last]
+			elif:
+				payload = passwd + name +'8'+ txt[first:last]
+			
+			
+			
+			
 		
 		# armamos el paquete (las capas que no definimos son definidas automaticamente por scapy)
 		pkt = l3/l4/payload
@@ -249,9 +261,10 @@ while True:
 		txt = fdest.read()
 		fdest.close()
 		sendtxt(txt,'f') # Mando el archivo
+		md5orig = str(getmd5(source)) # Calculo el md5sum del archivo original que envio
+		sendtxt(md5orig,'s') # Mando el md5sum del archivo original (antes de convertirlo a base64)
 		# Borro el archivo temporal donde guarde el base64 del archivo que quiero enviar
 		os.system('rm -f /tmp/semSharedFile')
-		
 		continue
 		
 		
