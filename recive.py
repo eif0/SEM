@@ -115,11 +115,11 @@ def monitor_callback(pkt):
 			f = open(archivo, 'r')
 			lastline = f.readlines()[-1] # Leo la ultima linea del log
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
-			if decypher(lastline[0:11],encodetype) != '[ '+name+' ]:  ':
+			if lastline[0:11] != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
-				print 'sin descifrar|'+lastline[2:6]+'|'
-				print 'descifrado|'+decypher(lastline[2:6],encodetype)+'|'
-				print 'mi nombre|'+name+'|'
+#				print 'sin descifrar|'+lastline[2:6]+'|'
+#				print 'descifrado|'+decypher(lastline[2:6],encodetype)+'|'
+#				print 'mi nombre|'+name+'|'
 			f.close()
 		
 		
