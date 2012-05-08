@@ -86,6 +86,7 @@ def decypher(txt,tipocifrado):
 				listatxt[charnum] = chr(ord(txt[charnum])-5)
 			charnum += 1
 		txt = ''.join(listatxt)
+		print txt[8:12]
 		return txt
 
      
@@ -117,6 +118,7 @@ def monitor_callback(pkt):
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
 			if decypher(lastline[0:11],encodetype) != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
+				print ' N0MBRE = ||'+decypher(lastline[0:11],encodetype)+'||'+name+'||'
 			f.close()
 		
 		
