@@ -29,7 +29,13 @@ from scapy.all import *
 verbose = False
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 'hv', ['help','verbose'])
+opts, extra = getopt.getopt(sys.argv[1:], 't:hv', ['target=','help','verbose'])
+
+# Variables que van a ser globales
+global targetfromparam
+global target
+
+targetfromparam = False
 
 for code,param in opts:
 	if code in ['-h','--help']:
@@ -79,8 +85,12 @@ INSIDE APP PARAMS:
 '''
 		exit()
 
-	elif code in ['-v','--verbose']:
-		verbose = True
+	else:
+		if code in ['-v','--verbose']:
+			verbose = True
+		if code in ['-t','--target']:
+			targetfromparam = True
+			target = param
 
 
 
@@ -210,7 +220,10 @@ os.system('echo \'\' > message.txt')
 
 # Levanto los parametros necesarios para la comunicacion
 name = raw_input('Name(4-char) [random]: ')
-target = raw_input('Target device [192.168.1.71]: ')
+
+if targetfromparam == False:
+	target = raw_input('Target device [192.168.1.71]: ')
+
 passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
 
