@@ -255,7 +255,7 @@ if name == '':
 	# Creo un nombre random si no hay uno definido
 	name = ''.join([random.choice('abcdefghijklmnopqrstuvwxyz0123456789') for x in xrange(4)])
 if target == '':
-	target = '192.168.1.71'
+	target = '192.168.1.1'
 if encodetype == '':
 	encodetype = '0'
 if passwd == '':
