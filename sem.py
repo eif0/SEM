@@ -225,7 +225,7 @@ def cypher(txt,tipocifrado):
 		charnum = 0
 		while charnum <= txt.__len__():
 			print txt[charnum]
-		
+			charnum += 1
 		#txt[ch] = chr(ord(txt[ch])+5)
 			#numi = ord(txt[ch])
 		return txt
