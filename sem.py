@@ -224,7 +224,7 @@ def cypher(txt,tipocifrado):
 	if tipocifrado == '1':
 		#for ch in txt:
 			#txt[ch] = chr(ord(txt[ch])+5)
-			print ord(txt[ch])
+			numi = ord(txt[ch])
 		return txt
 		
 
