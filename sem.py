@@ -229,7 +229,6 @@ def cypher(txt,tipocifrado):
 				listatxt[charnum] = chr(ord(txt[charnum])+1)
 			charnum += 1
 		txt = ''.join(listatxt)
-		print txt
 		return txt
 		
 
