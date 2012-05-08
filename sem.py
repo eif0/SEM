@@ -226,7 +226,7 @@ def cypher(txt,tipocifrado):
 		listatxt = list(txt)
 		while charnum < txt.__len__():
 			
-			if (ord(txt[charnum]) <= 245) and (ord(txt[charnum]) => 20):
+			if (ord(txt[charnum]) <= 245) and (ord(txt[charnum]) >= 20):
 				listatxt[charnum] = chr(ord(txt[charnum])+5)
 			charnum += 1
 		txt = ''.join(listatxt)
