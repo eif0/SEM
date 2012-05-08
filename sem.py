@@ -138,43 +138,43 @@ def sendtxt(txt,tipo):
 		
 			# si es la primer parte del envio, y NO es la unica pongo el bit 13 en '0'
 			if (a == 0) and (a+1 != count):
-				payload = passwd + name +'0'+ txt[first:last]
+				payload = passwd + name +'00'+ txt[first:last]
 
 			# si es la primer parte del envio, y SI es la unica pongo el bit 13 en '5'
 			elif (a == 0) and (a+1 == count):
-				payload = passwd + name +'5'+ txt[first:last]
+				payload = passwd + name +'50'+ txt[first:last]
 
 			# si es la ultima parte del envio pongo el bit 13 en '9'
 			elif a+1 == count:
-				payload = passwd + name +'9'+ txt[first:last]
+				payload = passwd + name +'90'+ txt[first:last]
 
 			# si no es la primer parte ni la ultima pongo el bit 13 en '1'
 			else:
-				payload = passwd + name +'1'+ txt[first:last]
+				payload = passwd + name +'10'+ txt[first:last]
 		
 		# Me fijo si lo que se manda es un archivo
 		elif tipo == 'f':
 			
 			# Me fijo que sea el primer paquete correspondiente al archivo
 			if a == 0:
-				payload = passwd + name +'4'+ txt[first:last]
+				payload = passwd + name +'40'+ txt[first:last]
 			
 			# Me fijo que no sea el primer ni el ultimo paquete correspondiente al archivo
 			elif (a+1 != count) and (a != 0):
-				payload = passwd + name +'2'+ txt[first:last]
+				payload = passwd + name +'20'+ txt[first:last]
 			
 			# Si es la ultima parte de un archivo
 			else:
-				payload = passwd + name +'3'+ txt[first:last]
+				payload = passwd + name +'30'+ txt[first:last]
 		
 		# Me fijo si lo que se manda es un md5sum
 		elif tipo == 's':
 			
 			# Me fijo que no sea la ultima parte del sum
 			if a+1 != count:
-				payload = passwd + name +'7'+ txt[first:last]
+				payload = passwd + name +'70'+ txt[first:last]
 			else:
-				payload = passwd + name +'8'+ txt[first:last]
+				payload = passwd + name +'80'+ txt[first:last]
 			
 			
 			

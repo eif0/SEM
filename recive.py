@@ -29,7 +29,9 @@
 #		es '8' si es un envio de una ultima parte de un md5sum
 #		es '9' si es la ultima parte de un envio de una serie 
 #
-# bit 14-.. :
+# bit 14 :
+#		tipo de codificado a aplicar
+# bit 15-.. :
 #		texto a mandar
 #
 # ------------------------------------------------------
@@ -77,7 +79,7 @@ def monitor_callback(pkt):
 	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
-		data = pkt[ICMP].load[13:]
+		data = pkt[ICMP].load[14:]
 		
 		
 		# Verifico si es la primer parte de una serie o un paquete unico
@@ -103,7 +105,7 @@ def monitor_callback(pkt):
 		
 		# Si me llega una parte inicial de un archivo
 		elif pkt[ICMP].load[12:13] == '4':
-			data = pkt[ICMP].load[13:]
+			data = pkt[ICMP].load[14:]
 			
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -111,7 +113,7 @@ def monitor_callback(pkt):
 		
 		# Si me llega una parte intermedia de un archivo
 		elif pkt[ICMP].load[12:13] == '2':
-			data = pkt[ICMP].load[13:]
+			data = pkt[ICMP].load[14:]
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -119,7 +121,7 @@ def monitor_callback(pkt):
 			
 		# Si me llega la ultima parte de un archivo
 		elif pkt[ICMP].load[12:13] == '3':
-			data = pkt[ICMP].load[13:]
+			data = pkt[ICMP].load[14:]
 
 			f = open(recibido, 'a')
 			print >>f, data,
