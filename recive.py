@@ -83,7 +83,7 @@ def decypher(txt,tipocifrado):
 		while charnum < txt.__len__():
 
 			if (ord(txt[charnum]) <= 250) and (ord(txt[charnum]) >= 25):
-				listatxt[charnum] = chr(ord(txt[charnum])-1)
+				listatxt[charnum] = chr(ord(txt[charnum])-5)
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt
@@ -117,9 +117,6 @@ def monitor_callback(pkt):
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
 			if lastline[0:11] != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
-#				print 'sin descifrar|'+lastline[2:6]+'|'
-#				print 'descifrado|'+decypher(lastline[2:6],encodetype)+'|'
-#				print 'mi nombre|'+name+'|'
 			f.close()
 		
 		
