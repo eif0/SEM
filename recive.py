@@ -78,7 +78,8 @@ def decypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('_','a')
+		for ch in txt:
+			txt[ch] = chr(ord(txt[ch])-5)
 		return txt
 
      

@@ -223,8 +223,7 @@ def cypher(txt,tipocifrado):
 		return txt
 	if tipocifrado == '1':
 		for ch in txt:
-			print ch
-			#txt[ch] = chr(ord(txt[ch])+5)
+			txt[ch] = chr(ord(txt[ch])+5)
 		return txt
 		
 
