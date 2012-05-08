@@ -222,7 +222,9 @@ def cypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('a','_')
+		for ch in txt:
+			print ch
+			#txt[ch] = chr(ord(txt[ch])+5)
 		return txt
 		
 
