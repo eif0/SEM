@@ -222,7 +222,7 @@ def cypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('a','a')
+		txt = txt.replace('a','_')
 		return txt
 		
 
