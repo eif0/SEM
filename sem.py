@@ -218,6 +218,20 @@ def getmd5(file_sum):
 	os.system('rm -f '+file_sum+'.sum')
 	return md5
 
+def cypher(txt,tipocifrado):
+	if tipocifrado == '0':
+		return txt
+	if tipocifrado == '1':
+		txt = txt.replace('a','0')
+		return txt
+		
+def decypher(txt,tipocifrado):
+	if tipocifrado == '0':
+		return txt
+	if tipocifrado == '1':
+		txt = txt.replace('0','a')
+		return txt
+	
 
 # Comienza la interfaz del usr
 
@@ -231,7 +245,7 @@ if targetfromparam == False:
 	target = raw_input('Target device [192.168.1.1]: ')
 	
 if encodefromparam == False:
-	encodetype = raw_input('Encode Type [1]: ')
+	encodetype = raw_input('Encode Type [0]: ')
 
 passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
@@ -243,7 +257,7 @@ if name == '':
 if target == '':
 	target = '192.168.1.71'
 if encodetype == '':
-	encodetype = '1'
+	encodetype = '0'
 if passwd == '':
 	passwd = '20121357'
 if interface == '':
