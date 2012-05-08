@@ -144,43 +144,43 @@ def sendtxt(txt,tipo):
 		
 			# si es la primer parte del envio, y NO es la unica pongo el bit 13 en '0'
 			if (a == 0) and (a+1 != count):
-				payload = passwd + name +'0' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'0' + encodetype + cypher(txt[first:last],encodetype)
 
 			# si es la primer parte del envio, y SI es la unica pongo el bit 13 en '5'
 			elif (a == 0) and (a+1 == count):
-				payload = passwd + name +'5' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'5' + encodetype + cypher(txt[first:last],encodetype)
 
 			# si es la ultima parte del envio pongo el bit 13 en '9'
 			elif a+1 == count:
-				payload = passwd + name +'9' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'9' + encodetype + cypher(txt[first:last],encodetype)
 
 			# si no es la primer parte ni la ultima pongo el bit 13 en '1'
 			else:
-				payload = passwd + name +'1' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'1' + encodetype + cypher(txt[first:last],encodetype)
 		
 		# Me fijo si lo que se manda es un archivo
 		elif tipo == 'f':
 			
 			# Me fijo que sea el primer paquete correspondiente al archivo
 			if a == 0:
-				payload = passwd + name +'4' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'4' + encodetype + cypher(txt[first:last],encodetype)
 			
 			# Me fijo que no sea el primer ni el ultimo paquete correspondiente al archivo
 			elif (a+1 != count) and (a != 0):
-				payload = passwd + name +'2' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'2' + encodetype + cypher(txt[first:last],encodetype)
 			
 			# Si es la ultima parte de un archivo
 			else:
-				payload = passwd + name +'3' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'3' + encodetype + cypher(txt[first:last],encodetype)
 		
 		# Me fijo si lo que se manda es un md5sum
 		elif tipo == 's':
 			
 			# Me fijo que no sea la ultima parte del sum
 			if a+1 != count:
-				payload = passwd + name +'7' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'7' + encodetype + cypher(txt[first:last],encodetype)
 			else:
-				payload = passwd + name +'8' + encodetype + txt[first:last]
+				payload = cypher(passwd,encodetype) + cypher(name,encodetype) +'8' + encodetype + cypher(txt[first:last],encodetype)
 			
 			
 			

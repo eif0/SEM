@@ -71,6 +71,21 @@ for code,param in opts:
   elif code in ['-p','--password']:
      passwd = param     
      
+
+def cypher(txt,tipocifrado):
+	if tipocifrado == '0':
+		return txt
+	if tipocifrado == '1':
+		txt = txt.replace('a','0')
+		return txt
+		
+def decypher(txt,tipocifrado):
+	if tipocifrado == '0':
+		return txt
+	if tipocifrado == '1':
+		txt = txt.replace('0','a')
+		return txt
+
      
 # Definimos la funcion que se va a llamar en la llegada de cada paquete
 def monitor_callback(pkt):
