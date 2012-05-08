@@ -275,7 +275,7 @@ while passwd.__len__() < 8:
 	passwd = passwd+'_'
 	
 # Dejo monitoreando en background para la recepcion de mensajes
-rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'--encode='+encodetype'&'])
+rec_p = subprocess.Popen(['python', 'recive.py','--name='+name,'--interface='+interface,'--password='+passwd,'--encode='+encodetype,'&'])
 rec_pid = rec_p.pid
 
 # Loop para chatear
