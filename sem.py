@@ -226,7 +226,8 @@ def cypher(txt,tipocifrado):
 		while charnum < txt.__len__():
 			charnum += 1
 			if txt[charnum] != '\n':
-				txt[charnum] = chr(ord(txt[charnum])+1)
+				print ord(txt[charnum])
+				#txt[charnum] = chr(ord(txt[charnum])+1)
 		return txt
 		
 
