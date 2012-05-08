@@ -78,9 +78,9 @@ def decypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		for ch in txt:
+		#for ch in txt:
 			#txt[ch] = chr(ord(txt[ch])-5)
-			hola = 'a'
+		#	hola = 'a'
 		return txt
 
      
