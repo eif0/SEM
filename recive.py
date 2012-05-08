@@ -78,7 +78,7 @@ def decypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('b','a')
+		txt = txt.replace('a','a')
 		return txt
 
      
