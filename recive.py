@@ -91,16 +91,17 @@ def decypher(txt,tipocifrado):
 def monitor_callback(pkt):
 	global recibido
 	global tempfile
+	encodetype = pkt[ICMP].load[13:14]
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
-	if ICMP in pkt and pkt[ICMP].type == 8 and pkt[ICMP].load[0:8] == passwd:
+	if ICMP in pkt and pkt[ICMP].type == 8 and decypher(pkt[ICMP].load[0:8],encodetype) == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
-		data = pkt[ICMP].load[14:]
+		data = decypher(pkt[ICMP].load[14:],encodetype)
 		
 		
 		# Verifico si es la primer parte de una serie o un paquete unico
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
-			print >>f,'[',pkt[ICMP].load[8:12],']: ', # Imprimo en el log el nombre del usuario
+			print >>f,'[',decypher(pkt[ICMP].load[8:12],encodetype),']: ', # Imprimo en el log el nombre del usuario
 			print >>f, data,
 		
 		# Me fijo para loguear los datos que pertenecen a la parte intermedia o final
@@ -121,7 +122,7 @@ def monitor_callback(pkt):
 		
 		# Si me llega una parte inicial de un archivo
 		elif pkt[ICMP].load[12:13] == '4':
-			data = pkt[ICMP].load[14:]
+			data = decypher(pkt[ICMP].load[14:],encodetype)
 			
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -129,7 +130,7 @@ def monitor_callback(pkt):
 		
 		# Si me llega una parte intermedia de un archivo
 		elif pkt[ICMP].load[12:13] == '2':
-			data = pkt[ICMP].load[14:]
+			data = decypher(pkt[ICMP].load[14:],encodetype)
 
 			f = open(recibido, 'a')
 			print >>f, data,
@@ -137,14 +138,14 @@ def monitor_callback(pkt):
 			
 		# Si me llega la ultima parte de un archivo
 		elif pkt[ICMP].load[12:13] == '3':
-			data = pkt[ICMP].load[14:]
+			data = decypher(pkt[ICMP].load[14:],encodetype)
 
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
 			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			
-			if pkt[ICMP].load[8:12] != name:
+			if decypher(pkt[ICMP].load[8:12],encodetype) != name:
 				print '		            - Transfer ID: '+tempfile+' -\n'
 			else:
 				print '\n\n\n'
@@ -153,13 +154,13 @@ def monitor_callback(pkt):
 			recibido = '/tmp/'+tempfile
 
 		# Si llega la primer parte o una parte intermedia de un md5sum y no es un echo-reply
-		elif (pkt[ICMP].load[12:13] == '7') and (pkt[ICMP].load[8:12] != name):
+		elif (pkt[ICMP].load[12:13] == '7') and (decypher(pkt[ICMP].load[8:12],encodetype) != name):
 			f = open(recibido+'.sum', 'a')
 			print >>f, data,
 			f.close()
 			
 		# Si llega la ultima parte del md5sum y no es un echo-reply
-		elif (pkt[ICMP].load[12:13] == '8') and (pkt[ICMP].load[8:12] != name):
+		elif (pkt[ICMP].load[12:13] == '8') and (decypher(pkt[ICMP].load[8:12],encodetype) != name):
 			f = open(recibido+'.sum', 'a')
 			print >>f, data,
 			f.close()
