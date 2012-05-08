@@ -92,7 +92,7 @@ def decypher(txt,tipocifrado):
 def monitor_callback(pkt):
 	global recibido
 	global tempfile
-	print 'encode: '+encodetype
+	
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and decypher(pkt[ICMP].load[0:8],encodetype) == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
@@ -114,7 +114,7 @@ def monitor_callback(pkt):
 			f = open(archivo, 'r')
 			lastline = f.readlines()[-1] # Leo la ultima linea del log
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
-			if lastline[0:11] != '[ '+name+' ]:  ':
+			if decypher(lastline[0:11],encodetype) != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
 			f.close()
 		
