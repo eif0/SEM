@@ -49,7 +49,7 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 'n:i:f:p:', ['name=', 'interface=', 'file=', 'password=' ])
+opts, extra = getopt.getopt(sys.argv[1:], 'n:i:f:p:e:', ['name=', 'interface=', 'file=', 'password=', 'encode=' ])
 
 # Definimos valores por defecto { solo se usa en ejecuciones manuales del script }
 interface='eth0'
@@ -58,7 +58,7 @@ passwd='20121357'
 name ='test'
 tempfile = str(int(time.time()))
 recibido = '/tmp/'+tempfile
-
+encodetype = '0'
 
 # Levanta los valores de los parametros
 for code,param in opts:
@@ -66,11 +66,12 @@ for code,param in opts:
      name = param	
   if code in ['-i','--interface']:
      interface = param
-  elif code in ['-f','--file']:
+  if code in ['-f','--file']:
      archivo = param
-  elif code in ['-p','--password']:
+  if code in ['-p','--password']:
      passwd = param     
-     
+  if code in ['-e','--encode']:
+     encodetype = param     
 
 def cypher(txt,tipocifrado):
 	if tipocifrado == '0':
@@ -91,14 +92,12 @@ def decypher(txt,tipocifrado):
 def monitor_callback(pkt):
 	global recibido
 	global tempfile
-	global encodetype
 	
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and decypher(pkt[ICMP].load[0:8],encodetype) == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = decypher(pkt[ICMP].load[14:],encodetype)
-		encodetype = pkt[ICMP].load[13:14]
 		
 		# Verifico si es la primer parte de una serie o un paquete unico
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
