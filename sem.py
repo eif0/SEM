@@ -222,7 +222,7 @@ def cypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		print txt+' es'+txt.__len__()
+		print txt+' es '+str(txt.__len__())
 		#txt[ch] = chr(ord(txt[ch])+5)
 			#numi = ord(txt[ch])
 		return txt
