@@ -118,7 +118,6 @@ def monitor_callback(pkt):
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
 			if decypher(lastline[0:11],encodetype) != '[ '+name+' ]:  ':
 				print '					<< '+lastline[11:]
-				print ' N0MBRE = ||'+decypher(lastline[0:11],encodetype)+'||'+name+'||'
 			f.close()
 		
 		
