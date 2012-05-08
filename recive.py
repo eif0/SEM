@@ -82,7 +82,7 @@ def decypher(txt,tipocifrado):
 		listatxt = list(txt)
 		while charnum < txt.__len__():
 			if (ord(txt[charnum]) != 10) and (ord(txt[charnum]) < 256) and (ord(txt[charnum]) > 0):
-				listatxt[charnum] = chr(ord(txt[charnum])-1)
+				listatxt[charnum] = chr(ord(txt[charnum])-0)
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt
