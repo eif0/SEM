@@ -223,12 +223,13 @@ def cypher(txt,tipocifrado):
 		return txt
 	if tipocifrado == '1':
 		charnum = 0
+		listatxt = list(txt)
 		while charnum < txt.__len__():
 			if ord(txt[charnum]) != 10:
-				txt[charnum] = chr(ord(txt[charnum])+1)
-				print chr(ord(txt[charnum]))
+				listatxt[charnum] = chr(ord(txt[charnum])+1)
 			charnum += 1
-				#txt[charnum] = chr(ord(txt[charnum])+1)
+		txt = ''.join(listatxt)
+		print txt
 		return txt
 		
 
