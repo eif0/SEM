@@ -225,13 +225,6 @@ def cypher(txt,tipocifrado):
 		txt = txt.replace('a','b')
 		return txt
 		
-def decypher(txt,tipocifrado):
-	if tipocifrado == '0':
-		return txt
-	if tipocifrado == '1':
-		txt = txt.replace('b','a')
-		return txt
-	
 
 # Comienza la interfaz del usr
 

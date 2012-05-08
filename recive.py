@@ -73,12 +73,6 @@ for code,param in opts:
   if code in ['-e','--encode']:
      encodetype = param     
 
-def cypher(txt,tipocifrado):
-	if tipocifrado == '0':
-		return txt
-	if tipocifrado == '1':
-		txt = txt.replace('a','b')
-		return txt
 		
 def decypher(txt,tipocifrado):
 	if tipocifrado == '0':
