@@ -86,7 +86,7 @@ def decypher(txt,tipocifrado):
 				listatxt[charnum] = chr(ord(txt[charnum])-5)
 			charnum += 1
 		txt = ''.join(listatxt)
-		print txt[8:12]
+		print 'TEXTO:'+txt[8:12]+'|'
 		return txt
 
      
