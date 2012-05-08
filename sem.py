@@ -222,14 +222,14 @@ def cypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('a','0')
+		txt = txt.replace('a','b')
 		return txt
 		
 def decypher(txt,tipocifrado):
 	if tipocifrado == '0':
 		return txt
 	if tipocifrado == '1':
-		txt = txt.replace('0','a')
+		txt = txt.replace('b','a')
 		return txt
 	
 
