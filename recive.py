@@ -81,8 +81,9 @@ def decypher(txt,tipocifrado):
 		charnum = 0
 		listatxt = list(txt)
 		while charnum < txt.__len__():
-			if (ord(txt[charnum]) != 10) and (ord(txt[charnum]) < 256) and (ord(txt[charnum]) > 0):
-				listatxt[charnum] = chr(ord(txt[charnum])-0)
+			# Solo me fijo para encodear distintos los caracteres imprimibles 'criticos'
+			if (ord(txt[charnum]) < 125) and (ord(txt[charnum]) > 39):
+				listatxt[charnum] = chr(ord(txt[charnum])-5)
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt
