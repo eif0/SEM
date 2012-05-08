@@ -29,12 +29,15 @@ from scapy.all import *
 verbose = False
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 't:hv', ['target=','help','verbose'])
+opts, extra = getopt.getopt(sys.argv[1:], 't:e:hv', ['target=','encode=','help','verbose'])
 
 # Variables que van a ser globales
 global targetfromparam
 global target
+global encodefromparam
+global encodetype
 
+encodefromparam = False
 targetfromparam = False
 
 for code,param in opts:
@@ -91,6 +94,9 @@ INSIDE APP PARAMS:
 		if code in ['-t','--target']:
 			targetfromparam = True
 			target = param
+		if code in ['-e','--encode']:
+			encodefromparam = True
+			encodetype = param
 
 
 
@@ -222,7 +228,10 @@ os.system('echo \'\' > message.txt')
 name = raw_input('Name(4-char) [random]: ')
 
 if targetfromparam == False:
-	target = raw_input('Target device [192.168.1.71]: ')
+	target = raw_input('Target device [192.168.1.1]: ')
+	
+if encodefromparam == False:
+	encodetype = raw_input('Encode Type [1]: ')
 
 passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 interface = raw_input('Interface for the communication (listening) [eth0]: ')
@@ -233,6 +242,8 @@ if name == '':
 	name = ''.join([random.choice('abcdefghijklmnopqrstuvwxyz0123456789') for x in xrange(4)])
 if target == '':
 	target = '192.168.1.71'
+if encodetype == '':
+	encodetype = '1'
 if passwd == '':
 	passwd = '20121357'
 if interface == '':

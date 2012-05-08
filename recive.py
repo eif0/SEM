@@ -31,6 +31,7 @@
 #
 # bit 14 :
 #		tipo de codificado a aplicar
+#
 # bit 15-.. :
 #		texto a mandar
 #
