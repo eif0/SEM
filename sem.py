@@ -225,10 +225,9 @@ def cypher(txt,tipocifrado):
 		charnum = 0
 		while charnum < txt.__len__():
 			if ord(txt[charnum]) != 10:
+				txt[charnum] = chr(ord(txt[charnum])+1)
 				print chr(ord(txt[charnum]))
 			charnum += 1
-			#if ord(txt[charnum]) != 10:
-			#	print ord(txt[charnum])
 				#txt[charnum] = chr(ord(txt[charnum])+1)
 		return txt
 		
