@@ -92,13 +92,13 @@ def decypher(txt,tipocifrado):
 def monitor_callback(pkt):
 	global recibido
 	global tempfile
-	print encodetype
+	
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and decypher(pkt[ICMP].load[0:8],encodetype) == passwd:
 		# Abrimos el archivo de destino y escribimos los datos recibidos
 		f = open(archivo, 'a')
 		data = decypher(pkt[ICMP].load[14:],encodetype)
-		
+		print data
 		# Verifico si es la primer parte de una serie o un paquete unico
 		if (pkt[ICMP].load[12:13] == '0') or (pkt[ICMP].load[12:13] == '5'):
 			print >>f,'[',decypher(pkt[ICMP].load[8:12],encodetype),']: ', # Imprimo en el log el nombre del usuario
