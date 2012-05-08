@@ -225,8 +225,8 @@ def cypher(txt,tipocifrado):
 		charnum = 0
 		listatxt = list(txt)
 		while charnum < txt.__len__():
-			# Solo me fijo para encodear distintos los caracteres imprimibles 'criticos'
-			if (ord(txt[charnum]) < 130) and (ord(txt[charnum]) > 30):
+			
+			if (ord(txt[charnum]) <= 245) and (ord(txt[charnum]) => 20):
 				listatxt[charnum] = chr(ord(txt[charnum])+5)
 			charnum += 1
 		txt = ''.join(listatxt)
