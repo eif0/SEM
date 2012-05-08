@@ -91,6 +91,7 @@ def decypher(txt,tipocifrado):
 def monitor_callback(pkt):
 	global recibido
 	global tempfile
+	global encodetype
 	
 	# Filtramos solamente los paquetes que sean ICMP del tipo 'echo-request'( tipo 8 ) y que contengan la key que definimos
 	if ICMP in pkt and pkt[ICMP].type == 8 and decypher(pkt[ICMP].load[0:8],encodetype) == passwd:
