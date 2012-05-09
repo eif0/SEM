@@ -38,69 +38,6 @@ global target
 global encodefromparam
 global encodetype
 
-encodefromparam = False
-targetfromparam = False
-
-for code,param in opts:
-	if code in ['-h','--help']:
-		print '''
-SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
-Last release available in: https://github.com/renateitor/SEM
-
-*** Must run as root ***
-
-Deps: tcpdump, python-scapy
-
-
-EXTERNAL PARAMS:
-      
- -h  --help 
-      Show this message
-      
- -v  --verbose
-      Show inside app information about the number of ICMP packages sent     
-      
-      
-      
-INSIDE APP PARAMS:
-
- :q!
-      Exit Program
-
- :c!
-      Clear Screen
-      
- :h!
-      Show Help
-      
- :v!
-      Start Verbose Mode 
-      
- :s!
-      Start Simple Mode (Stop Verbose)
-      
- :send!
-      Send a File
-      
- :save!
-      Save a Recived a File      
-             
-			
-'''
-		exit()
-
-	elif code in ['-b','--background']:
-		backgroundmode()
-		
-	else:
-		if code in ['-v','--verbose']:
-			verbose = True
-		if code in ['-t','--target']:
-			targetfromparam = True
-			target = param
-		if code in ['-e','--encode']:
-			encodefromparam = True
-			encodetype = param
 
 
 
@@ -295,6 +232,75 @@ def cypher(txt,tipocifrado):
 		return txt
 	
 		
+
+
+
+encodefromparam = False
+targetfromparam = False
+
+for code,param in opts:
+	if code in ['-h','--help']:
+		print '''
+SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
+Last release available in: https://github.com/renateitor/SEM
+
+*** Must run as root ***
+
+Deps: tcpdump, python-scapy
+
+
+EXTERNAL PARAMS:
+      
+ -h  --help 
+      Show this message
+      
+ -v  --verbose
+      Show inside app information about the number of ICMP packages sent     
+      
+      
+      
+INSIDE APP PARAMS:
+
+ :q!
+      Exit Program
+
+ :c!
+      Clear Screen
+      
+ :h!
+      Show Help
+      
+ :v!
+      Start Verbose Mode 
+      
+ :s!
+      Start Simple Mode (Stop Verbose)
+      
+ :send!
+      Send a File
+      
+ :save!
+      Save a Recived a File      
+             
+			
+'''
+		exit()
+
+	elif code in ['-b','--background']:
+		backgroundmode()
+		
+	else:
+		if code in ['-v','--verbose']:
+			verbose = True
+		if code in ['-t','--target']:
+			targetfromparam = True
+			target = param
+		if code in ['-e','--encode']:
+			encodefromparam = True
+			encodetype = param
+
+
+
 
 # Comienza la interfaz del usr
 
