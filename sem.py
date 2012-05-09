@@ -231,6 +231,7 @@ def cypher(txt,tipocifrado):
 		txt = ''.join(listatxt)
 		return txt
 	
+	# Para cambiar todos los caracteres criticos
 	if tipocifrado == '3':
 		charnum = 0
 		listatxt = list(txt)
@@ -239,10 +240,10 @@ def cypher(txt,tipocifrado):
 			# A todos los numeros les resto 30 (a su ASCII decimal)
 			if (ord(txt[charnum]) >= 48) and (ord(txt[charnum]) <= 57):
 				listatxt[charnum] = chr(ord(txt[charnum])-30)
-			
+			# A todas las letras mayusculas les sumo 101 (a su ASCII decimal)
 			if (ord(txt[charnum]) >= 65) and (ord(txt[charnum]) <= 90):
 				listatxt[charnum] = chr(ord(txt[charnum])+101)
-			
+			# A todas las letras minusculas les sumo 116 (a su ASCII decimal)
 			if (ord(txt[charnum]) >= 97) and (ord(txt[charnum]) <= 122):
 				listatxt[charnum] = chr(ord(txt[charnum])+116)
 				
