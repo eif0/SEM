@@ -46,7 +46,7 @@ global encodetype
 # Funcion que encodea en base64 los archivos para enviarlos
 
 def backgroundmode():
-	print '\n\n'
+	print '\n'
 	encodetype = raw_input('Encode Type [0]: ')
 	passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 	interface = raw_input('Interface for the communication (listening) [eth0]: ')
