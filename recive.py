@@ -132,7 +132,7 @@ def monitor_callback(pkt):
 
 		# Si es el ultimo paquete de una serie, o el unico mostramos los datos por pantalla
 		if (pkt[ICMP].load[12:13] == '9') or (pkt[ICMP].load[12:13] == '5'):
-			if backed = False:
+			if backed == False:
 				
 				f = open(archivo, 'r')
 				lastline = f.readlines()[-1] # Leo la ultima linea del log
@@ -166,14 +166,14 @@ def monitor_callback(pkt):
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
-			if backed = False:
+			if backed == False:
 				print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			
 			if decypher(pkt[ICMP].load[8:12],encodetype) != name:
-				if backed = False:
+				if backed == False:
 					print '		            - Transfer ID: '+tempfile+' -\n'
 			else:
-				if backed = False:
+				if backed == False:
 					print '\n\n\n'
 			
 			tempfile = str(int(time.time()))
@@ -193,7 +193,7 @@ def monitor_callback(pkt):
 			fdest = open(recibido+'.sum', "r")
 			remotemd5sum = fdest.read()
 			fdest.close()
-			if backed = False:
+			if backed == False:
 				print '      Remote File md5sum: '+remotemd5sum.split(' ')[0]
 				print '		        { to get the file execute \':save!\' }\n\n\n'
 			
