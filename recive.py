@@ -132,13 +132,14 @@ def monitor_callback(pkt):
 
 		# Si es el ultimo paquete de una serie, o el unico mostramos los datos por pantalla
 		if (pkt[ICMP].load[12:13] == '9') or (pkt[ICMP].load[12:13] == '5'):
-			f = open(archivo, 'r')
-			lastline = f.readlines()[-1] # Leo la ultima linea del log
-			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
-			if lastline[0:11] != '[ '+name+' ]:  ':
-				if backed = False:
-					print '					<< '+lastline[11:]
-			f.close()
+			if backed = False:
+				
+				f = open(archivo, 'r')
+				lastline = f.readlines()[-1] # Leo la ultima linea del log
+				# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
+				if lastline[0:11] != '[ '+name+' ]:  ':
+				print '					<< '+lastline[11:]
+				f.close()
 		
 		
 		
