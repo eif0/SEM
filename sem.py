@@ -134,7 +134,7 @@ def backgroundmode():
 	
 	os.system('echo \'\' > '+logsfile)
 
-	rec_p = subprocess.Popen(['python', 'recive.py','--name= null','--interface='+interface,'--password='+passwd,'--encode='+encodetype,'&'])
+	rec_p = subprocess.Popen(['python', 'recive.py','--interface='+interface,'--file='+logsfile,'--password='+passwd,'--encode='+encodetype,'--background','&'])
 	rec_pid = rec_p.pid
 	
 	print 'Starting SEM...'

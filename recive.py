@@ -50,16 +50,17 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 'n:i:f:p:e:', ['name=', 'interface=', 'file=', 'password=', 'encode=' ])
+opts, extra = getopt.getopt(sys.argv[1:], 'n:i:f:p:e:b', ['name=', 'interface=', 'file=', 'password=', 'encode=','background' ])
 
 # Definimos valores por defecto { solo se usa en ejecuciones manuales del script }
 interface='eth0'
 archivo='message.txt'
 passwd='20121357'
-name ='test'
+name ='v01d'
 tempfile = str(int(time.time()))
 recibido = '/tmp/'+tempfile
 encodetype = '0'
+backed = False
 
 # Levanta los valores de los parametros
 for code,param in opts:
@@ -72,7 +73,9 @@ for code,param in opts:
   if code in ['-p','--password']:
      passwd = param     
   if code in ['-e','--encode']:
-     encodetype = param     
+     encodetype = param
+  if code in ['-b','--background']:
+     backed = True
 
 		
 def decypher(txt,tipocifrado):
@@ -133,7 +136,8 @@ def monitor_callback(pkt):
 			lastline = f.readlines()[-1] # Leo la ultima linea del log
 			# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
 			if lastline[0:11] != '[ '+name+' ]:  ':
-				print '					<< '+lastline[11:]
+				if backed = False:
+					print '					<< '+lastline[11:]
 			f.close()
 		
 		
@@ -161,12 +165,15 @@ def monitor_callback(pkt):
 			f = open(recibido, 'a')
 			print >>f, data,
 			f.close()
-			print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
+			if backed = False:
+				print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			
 			if decypher(pkt[ICMP].load[8:12],encodetype) != name:
-				print '		            - Transfer ID: '+tempfile+' -\n'
+				if backed = False:
+					print '		            - Transfer ID: '+tempfile+' -\n'
 			else:
-				print '\n\n\n'
+				if backed = False:
+					print '\n\n\n'
 			
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
@@ -185,8 +192,9 @@ def monitor_callback(pkt):
 			fdest = open(recibido+'.sum', "r")
 			remotemd5sum = fdest.read()
 			fdest.close()
-			print '      Remote File md5sum: '+remotemd5sum.split(' ')[0]
-			print '		        { to get the file execute \':save!\' }\n\n\n'
+			if backed = False:
+				print '      Remote File md5sum: '+remotemd5sum.split(' ')[0]
+				print '		        { to get the file execute \':save!\' }\n\n\n'
 			
 			
 # empezamos a escuchar en la interface definida por parametro
