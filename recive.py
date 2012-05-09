@@ -138,7 +138,7 @@ def monitor_callback(pkt):
 				lastline = f.readlines()[-1] # Leo la ultima linea del log
 				# Me fijo que el ultimo mensaje del log no sea mio (ya que vuelven los echo-reply con mi propio texto)
 				if lastline[0:11] != '[ '+name+' ]:  ':
-				print '					<< '+lastline[11:]
+					print '					<< '+lastline[11:]
 				f.close()
 		
 		
