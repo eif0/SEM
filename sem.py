@@ -231,7 +231,7 @@ def cypher(txt,tipocifrado):
 		txt = ''.join(listatxt)
 		return txt
 	
-	# Para cambiar todos los caracteres criticos
+	# Para cambiar todos los caracteres criticos (a-z,A-Z,0-9) por caracteres no llamativos a simple vista
 	if tipocifrado == '3':
 		charnum = 0
 		listatxt = list(txt)
