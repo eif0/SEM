@@ -30,7 +30,7 @@ from scapy.all import *
 verbose = False
 
 # Levantamos lo que se pasa por parametro
-opts, extra = getopt.getopt(sys.argv[1:], 't:e:hv', ['target=','encode=','help','verbose'])
+opts, extra = getopt.getopt(sys.argv[1:], 't:e:hvb', ['target=','encode=','help','verbose','background'])
 
 # Variables que van a ser globales
 global targetfromparam
@@ -89,6 +89,9 @@ INSIDE APP PARAMS:
 '''
 		exit()
 
+	elif code in ['-b','--background']:
+		backgroundmode()
+		
 	else:
 		if code in ['-v','--verbose']:
 			verbose = True
@@ -104,6 +107,48 @@ INSIDE APP PARAMS:
 # Comenzamos a definir las funciones que van a hacer todo el trabajo
 
 # Funcion que encodea en base64 los archivos para enviarlos
+
+def backgroundmode():
+	encodetype = raw_input('Encode Type [0]: ')
+	passwd = raw_input('Key for the communication(8-char) [20121357]: ')
+	interface = raw_input('Interface for the communication (listening) [eth0]: ')
+	logtime = str(int(time.time()))
+	logsfile = raw_input('Log File [./semlogfile_'+logtime+']: ')
+	
+	if encodetype == '':
+		encodetype = '0'
+	if passwd == '':
+		passwd = '20121357'
+	if interface == '':
+		interface = 'eth0'
+	if logsfile '':
+		logsfile = './semlogfile_'+logtime
+
+	# Trunco las variables en caso de que excedan el tamanio max
+	passwd = passwd[0:8]
+	encodetype = encodetype[0:1]
+	
+	# Completo las variables en caso de que sean mas cortas que el min
+	while passwd.__len__() < 8:
+		passwd = passwd+'_'
+	
+	os.system('echo \'\' > '+logsfile)
+
+	rec_p = subprocess.Popen(['python', 'recive.py','--name= null','--interface='+interface,'--password='+passwd,'--encode='+encodetype,'&'])
+	rec_pid = rec_p.pid
+	
+	print 'Starting SEM...'
+	time.sleep(1)
+	print 'To watch the log file while it grows run: tail -f '+logsfile
+	time.sleep(1)
+	print 'PID: '+str(rec_pid)
+	print 'To stop recording run: kill -9 '+str(rec_pid)
+	
+	exit()
+	
+	
+	
+
 def encoder(source,dest): 
 	os.system('base64 '+source+' > '+dest)
 
