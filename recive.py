@@ -165,7 +165,7 @@ def monitor_callback(pkt):
 
 			f = open(recibido, 'a')
 			print >>f, data,
-			
+			f.close()
 			if backed == False:
 				print '\n\n\n		***[ Se completo la transferencia del archivo ]***'
 			
@@ -173,12 +173,14 @@ def monitor_callback(pkt):
 				if backed == False:
 					print '		            - Transfer ID: '+tempfile+' -\n'
 				else:
+					f = open(archivo, 'a')
 					print >>f, '*** [ Se recibio un archivo de '+ decypher(pkt[ICMP].load[8:12],encodetype)+' ]***\n',
 					print >>f, '*** [ Para recuperarlo ejecutar: \' base64 -d '+recibido+' > /path/to/save ]***\n',
+					f.close()
 			else:
 				if backed == False:
 					print '\n\n\n'
-			f.close()
+			
 			tempfile = str(int(time.time()))
 			recibido = '/tmp/'+tempfile
 
@@ -200,7 +202,7 @@ def monitor_callback(pkt):
 				print '      Remote File md5sum: '+remotemd5sum.split(' ')[0]
 				print '		        { to get the file execute \':save!\' }\n\n\n'
 			else:
-				f = open(recibido, 'a')
+				f = open(archivo, 'a')
 				print >>f, '*** [ Remote File md5sum: '+remotemd5sum.split(' ')[0]+' ] ***'
 				f.close()
 			
