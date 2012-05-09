@@ -173,7 +173,7 @@ def monitor_callback(pkt):
 				if backed == False:
 					print '		            - Transfer ID: '+tempfile+' -\n'
 				else:
-					print >>f, '*** [ Se recibió un archivo de '+ decypher(pkt[ICMP].load[8:12],encodetype)+' ]***\n',
+					print >>f, '*** [ Se recibio un archivo de '+ decypher(pkt[ICMP].load[8:12],encodetype)+' ]***\n',
 					print >>f, '*** [ Para recuperarlo ejecutar: \' base64 -d '+recibido+' > /path/to/save ]***\n',
 			else:
 				if backed == False:
