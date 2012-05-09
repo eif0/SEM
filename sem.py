@@ -46,6 +46,7 @@ global encodetype
 # Funcion que encodea en base64 los archivos para enviarlos
 
 def backgroundmode():
+	print '\n\n'
 	encodetype = raw_input('Encode Type [0]: ')
 	passwd = raw_input('Key for the communication(8-char) [20121357]: ')
 	interface = raw_input('Interface for the communication (listening) [eth0]: ')
@@ -73,13 +74,12 @@ def backgroundmode():
 
 	rec_p = subprocess.Popen(['python', 'recive.py','--interface='+interface,'--file='+logsfile,'--password='+passwd,'--encode='+encodetype,'--background','&'])
 	rec_pid = rec_p.pid
-	
-	print 'Starting SEM...'
+	print '\nStarting SEM in background mode...'
 	time.sleep(1)
-	print 'To watch the log file while it grows run: tail -f '+logsfile
+	print '\nTo watch the log file while it grows run: tail -f '+logsfile
 	time.sleep(1)
-	print 'PID: '+str(rec_pid)
-	print 'To stop recording run: kill -9 '+str(rec_pid)
+	print '\nPID: '+str(rec_pid)
+	print '\nTo stop recording run: kill -9 '+str(rec_pid)+'\n\n'
 	
 	exit()
 	
