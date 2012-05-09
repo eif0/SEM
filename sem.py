@@ -121,7 +121,7 @@ def backgroundmode():
 		passwd = '20121357'
 	if interface == '':
 		interface = 'eth0'
-	if logsfile '':
+	if logsfile == '':
 		logsfile = './semlogfile_'+logtime
 
 	# Trunco las variables en caso de que excedan el tamanio max
