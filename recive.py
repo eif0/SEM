@@ -75,8 +75,10 @@ for code,param in opts:
 
 		
 def decypher(txt,tipocifrado):
+	
 	if tipocifrado == '0':
 		return txt
+	
 	if tipocifrado == '1':
 		charnum = 0
 		listatxt = list(txt)
@@ -84,6 +86,20 @@ def decypher(txt,tipocifrado):
 
 			if (ord(txt[charnum]) <= 250) and (ord(txt[charnum]) >= 25):
 				listatxt[charnum] = chr(ord(txt[charnum])-5)
+			charnum += 1
+		txt = ''.join(listatxt)
+		return txt
+	
+	if tipocifrado == '2':
+		charnum = 0
+		listatxt = list(txt)
+		while charnum < txt.__len__():
+			if math.fmod(charnum,2) != 0:
+				if (ord(txt[charnum]) <= 250) and (ord(txt[charnum]) >= 25):
+					listatxt[charnum] = chr(ord(txt[charnum])+3)
+			else:
+				if (ord(txt[charnum]) <= 250) and (ord(txt[charnum]) >= 25):
+					listatxt[charnum] = chr(ord(txt[charnum])-7)
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt

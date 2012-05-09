@@ -20,6 +20,7 @@ import sys
 import getopt
 import logging
 import random
+import math
 
 # Definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
@@ -219,9 +220,11 @@ def getmd5(file_sum):
 	return md5
 
 def cypher(txt,tipocifrado):
-	if tipocifrado == '0':
+	
+	if tipocifrado == '0': # No se aplica ninguna codificacion
 		return txt
-	if tipocifrado == '1':
+	
+	if tipocifrado == '1': # Se incrementa el valor decimal (ord) de los ASCII en 5
 		charnum = 0
 		listatxt = list(txt)
 		while charnum < txt.__len__():
@@ -231,6 +234,21 @@ def cypher(txt,tipocifrado):
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt
+	
+	if tipocifrado == '2': # Las posiciones pares son aumentadas en 7 y las impares disminuidas en 3 (valores decimales de los ASCII)
+		charnum = 0
+		listatxt = list(txt)
+		while charnum < txt.__len__():
+			if math.fmod(charnum,2) != 0:
+				if (ord(txt[charnum]) <= 253) and (ord(txt[charnum]) >= 28):
+					listatxt[charnum] = chr(ord(txt[charnum])-3)
+			else:
+				if (ord(txt[charnum]) <= 243) and (ord(txt[charnum]) >= 18):
+					listatxt[charnum] = chr(ord(txt[charnum])+7)
+			charnum += 1
+		txt = ''.join(listatxt)
+		return txt
+	
 		
 
 # Comienza la interfaz del usr
