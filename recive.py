@@ -43,6 +43,7 @@ import sys
 import getopt
 import logging
 import time
+import math
 
 # Definimos que solamente se debe alertar ante un error
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
