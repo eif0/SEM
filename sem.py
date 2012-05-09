@@ -231,6 +231,25 @@ def cypher(txt,tipocifrado):
 		txt = ''.join(listatxt)
 		return txt
 	
+	if tipocifrado == '3':
+		charnum = 0
+		listatxt = list(txt)
+		while charnum < txt.__len__():
+			
+			# A todos los numeros les resto 30 (a su ASCII decimal)
+			if (ord(txt[charnum]) >= 48) and (ord(txt[charnum]) <= 57):
+				listatxt[charnum] = chr(ord(txt[charnum])-30)
+			
+			if (ord(txt[charnum]) >= 65) and (ord(txt[charnum]) <= 90):
+				listatxt[charnum] = chr(ord(txt[charnum])+101)
+			
+			if (ord(txt[charnum]) >= 97) and (ord(txt[charnum]) <= 122):
+				listatxt[charnum] = chr(ord(txt[charnum])+116)
+				
+			charnum += 1
+		txt = ''.join(listatxt)
+		return txt
+	
 		
 
 

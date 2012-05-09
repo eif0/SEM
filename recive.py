@@ -107,6 +107,25 @@ def decypher(txt,tipocifrado):
 			charnum += 1
 		txt = ''.join(listatxt)
 		return txt
+		
+	if tipocifrado == '3':
+		charnum = 0
+		listatxt = list(txt)
+		while charnum < txt.__len__():
+			
+			# A todos los numeros les resto 30 (a su ASCII decimal)
+			if (ord(txt[charnum]) >= 18) and (ord(txt[charnum]) <= 27):
+				listatxt[charnum] = chr(ord(txt[charnum])+30)
+			
+			if (ord(txt[charnum]) >= 166) and (ord(txt[charnum]) <= 191):
+				listatxt[charnum] = chr(ord(txt[charnum])-101)
+			
+			if (ord(txt[charnum]) >= 213) and (ord(txt[charnum]) <= 238):
+				listatxt[charnum] = chr(ord(txt[charnum])-116)
+				
+			charnum += 1
+		txt = ''.join(listatxt)
+		return txt
 
      
 # Definimos la funcion que se va a llamar en la llegada de cada paquete
