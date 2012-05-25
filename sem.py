@@ -277,7 +277,16 @@ EXTERNAL PARAMS:
  -v  --verbose
       Show inside app information about the number of ICMP packages sent     
       
+ -b  --background
+      Run in background mode (logs all incoming chat and files)
       
+ -t  --target
+      Define the target PC when calling the script, instead of defining it from inside the program
+      
+ -e  --encode
+      Define the encode type when calling the script, instead of defining it from inside the program
+      
+            
       
 INSIDE APP PARAMS:
 
