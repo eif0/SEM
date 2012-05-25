@@ -1,5 +1,5 @@
 SEM
 ===
 
-SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol
+SEM (Security Enhanced Messaging) is a PoC for implementing Covert Channels over ICMP protocol
 

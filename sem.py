@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #  
-# SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
+# SEM (Security Enhanced Messaging) is a PoC for implementing Covert Channels over ICMP protocol.
 # by renateitor
 #
 # Last release available in:
@@ -261,7 +261,7 @@ targetfromparam = False
 for code,param in opts:
 	if code in ['-h','--help']:
 		print '''
-SEM (Security Enhanced Messaging) is a PoC for implementing Cover Channels over ICMP protocol.
+SEM (Security Enhanced Messaging) is a PoC for implementing Covert Channels over ICMP protocol.
 Last release available in: https://github.com/renateitor/SEM
 
 *** Must run as root ***
