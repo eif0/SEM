@@ -2,10 +2,10 @@
 
 #  
 # SEM (Security Enhanced Messaging) is a PoC for implementing Covert Channels over ICMP protocol.
-# by renateitor
+# by eif0 [eif0@hush.com]
 #
 # Last release available in:
-# https://github.com/renateitor/SEM
+# https://github.com/eif0/SEM
 #
 # Debe ejecutarse como root ya que es la unica forma de crear paquete de red a medida
 # Dependencias: tcpdump, python-scapy
@@ -262,7 +262,7 @@ for code,param in opts:
 	if code in ['-h','--help']:
 		print '''
 SEM (Security Enhanced Messaging) is a PoC for implementing Covert Channels over ICMP protocol.
-Last release available in: https://github.com/renateitor/SEM
+Last release available in: https://github.com/eif0/SEM
 
 *** Must run as root ***
 
