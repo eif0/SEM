@@ -1,0 +1,9 @@
+*~
+*.lock
+*.swp
+*.out
+*.pid
+*.py[cod]
+/TO-DO
+/venv
+.env
